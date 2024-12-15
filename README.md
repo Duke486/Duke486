@@ -1,5 +1,5 @@
 # Welcome
-欢迎，这里是 [Duke486](https://duke486.com) 
+Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
 
 
 <div style="display: flex; gap: 10px;">
@@ -11,7 +11,13 @@
 ## Who am I？
 > <del>24601♪~~ </del>雾
 
-计算机专业学生，科技爱好者，喜欢ACGN文化。欢迎来信~
+CS在读学生，喜欢ACGN文化，PT入门玩家
+欢迎来信~
 
 ## Repos
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Web-Dev-Beginner)](https://github.com/Duke486/Web-Dev-Beginner)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Miku-Skin-ClashVerge)](https://github.com/Duke486/Miku-Skin-ClashVerge)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Galgamer_WebPlayer)](https://github.com/Duke486/Galgamer_WebPlayer)
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Fluent-Toys)](https://github.com/Duke486/Fluent-Toys)
+
+
