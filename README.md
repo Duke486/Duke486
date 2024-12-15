@@ -6,7 +6,7 @@ Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
 <div style="display: flex; gap: 25px;" align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="GitHub Stats">
   &nbsp;&nbsp;&nbsp;
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=135,d4fc79,96e6a1&hide=python" height="175px" alt="Top Languages">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=135,eafc9c,b1e6b8&hide=python" height="175px" alt="Top Languages">
 </div>
 
 
