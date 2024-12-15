@@ -5,8 +5,8 @@
 ![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff)
 
 ## 1
-<img src="[https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff](https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff)" height="50px" alt="Top Languages">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="50px" alt="Top Languages">
+<img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="150px" alt="Top Languages">
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="150px" alt="Top Languages">
 
 ## Who am I？
 > <del>24601♪~~ </del>雾
