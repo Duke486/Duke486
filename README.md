@@ -13,11 +13,15 @@ CS在读学生，喜欢ACGN文化，PT入门玩家
   &nbsp;&nbsp;&nbsp;
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=135,eafc9c,b1e6b8&hide=python" height="175px" alt="Top Languages">
 </div>
+
 ---
+
 <div style="display: flex; gap: 25px;" align="center">
-    <img src="[https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff](https://github.com/Duke486/Duke486/blob/main/all_metrics.svg)" alt="GitHub Stats">
+    <img src="https://github.com/Duke486/Duke486/blob/main/all_metrics.svg" alt="GitHub Stats">
 </div>
+
 ---
+
 ## Repos
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Web-Dev-Beginner)](https://github.com/Duke486/Web-Dev-Beginner)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Miku-Skin-ClashVerge)](https://github.com/Duke486/Miku-Skin-ClashVerge)
