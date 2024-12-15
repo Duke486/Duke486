@@ -1,12 +1,12 @@
 # Welcome
 欢迎，这里是 [Duke486](https://duke486.com) 
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff)
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff)
 
-## 1
-<img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="150px" alt="Top Languages">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="150px" alt="Top Languages">
+<div style="display: flex; gap: 10px;">
+  <img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="GitHub Stats">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="Top Languages">
+</div>
+
 
 ## Who am I？
 > <del>24601♪~~ </del>雾
