@@ -1,7 +1,6 @@
 # Welcome
 
-Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
-![visitors](https://visitor-badge.glitch.me/badge?page_id=Duke486&left_color=grey&right_color=blue)
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Microsoft+Yahei&duration=2000&pause=500&color=2A94C2&center=true&width=435&lines=Nyaa(%3D%40%CF%89%40%3D)~%E8%BF%99%E9%87%8C%E6%98%AF+%5BDuke486%5D%EF%BC%81;Meow(+%C2%B7+%CF%89+%C2%B7+)~here+is+Duke486!)](https://git.io/typing-svg)
 
 ## Who am I？
 > <del>24601♪~~ </del>雾
