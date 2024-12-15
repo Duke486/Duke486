@@ -8,4 +8,4 @@
 计算机专业学生，科技爱好者，喜欢ACGN文化。欢迎来信~
 
 ## Repos
-[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=anuraghazra&repo=github-readme-stats)]([https://github.com/anuraghazra/github-readme-stats](https://github.com/Duke486/Web-Dev-Beginner))
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Web-Dev-Beginner)](https://github.com/Duke486/Web-Dev-Beginner)
