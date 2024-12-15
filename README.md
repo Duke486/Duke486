@@ -17,7 +17,7 @@ CS在读学生，喜欢ACGN文化，PT入门玩家
 ---
 
 <div style="display: flex; gap: 25px;" align="center">
-    <img src="https://github.com/Duke486/Duke486/blob/main/all_metrics.svg" alt="GitHub Stats" width="100%">
+    <img src="https://github.com/Duke486/Duke486/blob/main/all_metrics.svg" alt="GitHub Stats" width="80%">
 </div>
 
 ---
