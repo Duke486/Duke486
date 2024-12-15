@@ -1,7 +1,7 @@
 # Welcome
 
 Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
-![visitors](https://visitor-badge.glitch.me/badge?page_id=page.id&left_color=green&right_color=red)
+![visitors](https://visitor-badge.glitch.me/badge?page_id=duke486&left_color=green&right_color=red)
 
 ## Who am I？
 > <del>24601♪~~ </del>雾
