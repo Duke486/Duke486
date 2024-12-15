@@ -1,5 +1,4 @@
 # Welcome
-<img src="https://sumygg.com/static/image/create-repository.708a6e17.png" alt="背景图" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -1;">
 
 Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
 
