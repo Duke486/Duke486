@@ -19,45 +19,21 @@ jobs:
       contents: write
 
     steps:
-      # Step 1: Generate GitHub metrics image
-      - name: Generate GitHub Metrics
+      # Step 1: Generate GitHub Metrics + AniList Metrics (Anime, Manga, and Characters)
+      - name: Generate GitHub and AniList Metrics
         uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.METRICS_TOKEN }}
-
-      # Step 2: Generate AniList Anime Favorites and Watching List
-      - name: Generate AniList Anime Metrics (Favorites and Watching)
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}  # Ensure to use your actual token
-          filename: metrics.plugin.anilist.anime.favorites_watching.svg
+          filename: all_metrics.svg
+          
+          # GitHub Metrics
+          github: yes
+          
+          # AniList Plugin Configuration
           plugin_anilist: yes
-          plugin_anilist_user: Duke8  # Your AniList username
-          plugin_anilist_medias: anime
-          plugin_anilist_sections: favorites,watching
-          plugin_anilist_limit: 5  # Limit to 5 favorite/watching items
+          plugin_anilist_user: Duke8  # Replace with your AniList username
+          plugin_anilist_medias: anime,manga  # Both anime and manga
+          plugin_anilist_sections: favorites,watching,reading,characters  # Include favorites, watching, reading, characters
+          plugin_anilist_limit: 5  # Limit to 5 items for each section
           plugin_anilist_limit_characters: 5  # Limit to 5 characters displayed
-
-      # Step 3: Generate AniList Manga Favorites and Reading List
-      - name: Generate AniList Manga Metrics (Favorites and Reading)
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          filename: metrics.plugin.anilist.manga.favorites_reading.svg
-          plugin_anilist: yes
-          plugin_anilist_user: Duke8
-          plugin_anilist_medias: manga
-          plugin_anilist_sections: favorites,reading
-          plugin_anilist_limit: 5
-          plugin_anilist_limit_characters: 5
-
-      # Step 4: Generate AniList Favorite Characters
-      - name: Generate AniList Favorite Characters Metrics
-        uses: lowlighter/metrics@latest
-        with:
-          token: ${{ secrets.METRICS_TOKEN }}
-          filename: metrics.plugin.anilist.characters.favorites.svg
-          plugin_anilist: yes
-          plugin_anilist_user: Duke8
-          plugin_anilist_sections: characters
-          plugin_anilist_limit_characters: 22  # Limit to 22 characters displayed
+          plugin_anilist_shuffle: yes  # Shuffle data for variety (optional)
