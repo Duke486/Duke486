@@ -3,10 +3,26 @@
 Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
 
 
-<div style="display: flex; gap: 10px;">
-  <img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="GitHub Stats">
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="Top Languages">
+<div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;">
+  <img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="GitHub Stats" 
+       style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="Top Languages" 
+       style="border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;">
 </div>
+
+<script>
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('mouseover', () => {
+      img.style.transform = 'scale(1.05)';
+      img.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.15)';
+    });
+    img.addEventListener('mouseout', () => {
+      img.style.transform = 'scale(1)';
+      img.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.1)';
+    });
+  });
+</script>
+
 
 
 ## Who am I？
