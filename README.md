@@ -2,6 +2,8 @@
 
 Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
 
+## Who am I？
+> <del>24601♪~~ </del>雾
 
 <div style="display: flex; gap: 25px;" align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&hide_border=true&bg_color=90,e0f2ff,a1d8ff" height="175px" alt="GitHub Stats">
@@ -9,14 +11,10 @@ Nyaa(=①ω①=)，这里是 [Duke486](https://duke486.com) ！
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=duke486&layout=compact&hide_border=true&bg_color=135,eafc9c,b1e6b8&hide=python" height="175px" alt="Top Languages">
 </div>
 
-
-
-
-## Who am I？
-> <del>24601♪~~ </del>雾
-
 CS在读学生，喜欢ACGN文化，PT入门玩家
 欢迎来信~
+
+![Metrics](https://github.com/Duke486/Duke486/blob/main/all_metrics.svg)
 
 ## Repos
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Web-Dev-Beginner)](https://github.com/Duke486/Web-Dev-Beginner)
@@ -25,4 +23,3 @@ CS在读学生，喜欢ACGN文化，PT入门玩家
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Fluent-Toys)](https://github.com/Duke486/Fluent-Toys)
 
 
-![Metrics](https://github.com/Duke486/Duke486/blob/main/github-metrics.svg)
