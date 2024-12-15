@@ -2,7 +2,7 @@
 
 [![Typing SVG](https://readme-typing-svg.demolab.com?font=Microsoft+Yahei&duration=2000&pause=500&color=2A94C2&center=true&width=435&lines=Nyaa(%3D%40%CF%89%40%3D)~%E8%BF%99%E9%87%8C%E6%98%AF+%5BDuke486%5D%EF%BC%81;Meow(+%C2%B7+%CF%89+%C2%B7+)~here+is+Duke486!)](https://git.io/typing-svg)
 
-## Who am I？
+## Who am I?
 > <del>24601♪~~ </del>雾
 
 CS在读学生，喜欢ACGN文化，PT入门玩家
@@ -28,4 +28,6 @@ CS在读学生，喜欢ACGN文化，PT入门玩家
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Galgamer_WebPlayer)](https://github.com/Duke486/Galgamer_WebPlayer)
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Fluent-Toys)](https://github.com/Duke486/Fluent-Toys)
 
+## Community contribution
 
+[![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=camera-2018&repo=hdu-cs-wiki&show_owner=true)](https://github.com/camera-2018/hdu-cs-wiki)
