@@ -25,4 +25,4 @@ CS在读学生，喜欢ACGN文化，PT入门玩家
 [![Readme Card](https://github-readme-stats.vercel.app/api/pin/?username=Duke486&repo=Fluent-Toys)](https://github.com/Duke486/Fluent-Toys)
 
 
-![Metrics](https://metrics.lecoq.io/Duke486?template=classic&anilist=1&base=header%2C%20activity%2C%20community%2C%20repositories%2C%20metadata&base.indepth=false&base.hireable=false&base.skip=false&anilist=false&anilist.user=Duke8&anilist.medias=anime%2C%20manga&anilist.sections=favorites&anilist.limit=2&anilist.limit.characters=22&anilist.shuffle=true&config.timezone=Asia%2FShanghai)
+![Metrics](https://github.com/Duke486/Duke486/blob/main/github-metrics.svg)
