@@ -1,7 +1,7 @@
 # Welcome
 欢迎，这里是 [Duke486](https://duke486.com) 
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&theme=transparent)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=duke486&show_icons=true&theme=transparent&bg_color=131deg,#abdcff,#0396ff)
 # Who am I？
 > <del>24601♪~~ </del>雾
 
