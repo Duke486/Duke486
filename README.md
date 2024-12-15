@@ -26,3 +26,5 @@ CS在读学生，喜欢ACGN文化，PT入门玩家
 
 
 ![Metrics](https://github.com/Duke486/Duke486/blob/main/github-metrics.svg)
+![1](https://github.com/Duke486/Duke486/blob/main/metrics.plugin.anilist.manga.favorites_reading.svg)
+![2](https://github.com/Duke486/Duke486/blob/main/metrics.plugin.anilist.anime.favorites_watching.svg)
