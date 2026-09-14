@@ -294,7 +294,11 @@ def read_data(module):
 
 
 def image_md(path, alt, width, link=None):
-    pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="./assets/{path}.dark.svg"><img src="./assets/{path}.light.svg" alt="{esc(alt)}" width="{width}" align="top"></picture>'
+    def raw_url(theme):
+        file = ASSETS / f'{path}.{theme}.svg'
+        version = hashlib.sha256(file.read_bytes()).hexdigest()[:12]
+        return f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/assets/{path}.{theme}.svg?v={version}'
+    pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}" align="top"></picture>'
     return f'<a href="{esc(link)}">{pic}</a>' if link else pic
 
 
@@ -338,7 +342,11 @@ def readme():
               '---', '', '<sub>最近成功更新：GitHub '+g.get('date','待更新')+' · AniList '+a.get('date','待更新')+' · Steam '+s.get('date','待更新')+'。每日生成，数据以来源为准。</sub>', '',
               '<sub>水蓝与薄荷之间，继续做喜欢的事。 · [素材来源与维护说明](./docs/MAINTENANCE.md)</sub>', '']
     content = '\n'.join(lines)
-    for rel in re.findall(r'(?:src|srcset)="\./([^\"]+)"', content):
+    raw_prefix = f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/'
+    for url in re.findall(r'(?:src|srcset)="([^\"]+)"', content):
+        if not url.startswith(raw_prefix):
+            raise ValueError('README image is not hosted in this repository')
+        rel = url[len(raw_prefix):].split('?', 1)[0]
         if not (ROOT / rel).is_file():
             raise ValueError('Missing README image: '+rel)
     (ROOT/'README.md').write_text(content, encoding='utf-8')

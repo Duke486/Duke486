@@ -22,6 +22,8 @@ Each module is fully generated and validated before replacing its last healthy s
 
 Generated SVGs contain embedded cover/portrait bytes. Generation needs network access; viewing does not depend on a public card-generation server. Existing cards remain visible if a source or scheduled workflow stops. GitHub can disable scheduled workflows after 60 days without repository activity; re-enable the workflow and run it manually when needed. This repo does not add fake activity to circumvent that rule.
 
+README images use explicit `raw.githubusercontent.com` URLs to avoid GitHub's relative-path redirect route. A short SHA-256 query parameter changes only when the image bytes change, so updated cards get a fresh cache key. Both theme versions are checked against local files before publishing the README.
+
 ## Local commands
 
 ```sh

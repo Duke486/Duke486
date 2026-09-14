@@ -76,5 +76,15 @@ class SnapshotProtection(unittest.TestCase):
         with patch.object(p.urllib.request,'urlopen',side_effect=TimeoutError),patch.object(p.time,'sleep'):
             with self.assertRaises(p.SourceError):p.request('https://example.com')
 
+    def test_readme_images_use_direct_raw_urls_and_content_keys(self):
+        folder=self.root/'assets/design';folder.mkdir(parents=True)
+        for theme in ('light','dark'):(folder/f'hero.{theme}.svg').write_text(self.good)
+        with patch.object(p,'ASSETS',self.root/'assets'):
+            first=p.image_md('design/hero','Title',960)
+            (folder/'hero.light.svg').write_text(self.good+'\n')
+            second=p.image_md('design/hero','Title',960)
+        self.assertIn('https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/hero.light.svg?v=',first)
+        self.assertNotEqual(first,second)
+
 
 if __name__=='__main__':unittest.main()
