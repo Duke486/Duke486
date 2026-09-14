@@ -1,0 +1,177 @@
+{
+  "date": "2026-09-14",
+  "id": 5123998,
+  "name": "Duke486",
+  "reading": [
+    {
+      "progress": 0,
+      "media": {
+        "id": 97700,
+        "title": {
+          "native": "CITY",
+          "romaji": "CITY",
+          "english": "CITY"
+        },
+        "coverImage": {
+          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/nx97700-Gvj77EXtkMLd.jpg"
+        },
+        "chapters": 210,
+        "siteUrl": "https://anilist.co/manga/97700"
+      }
+    },
+    {
+      "progress": 35,
+      "media": {
+        "id": 100080,
+        "title": {
+          "native": "お兄ちゃんはおしまい！",
+          "romaji": "Onii-chan wa Oshimai!",
+          "english": "ONIMAI: I'm Now Your Sister!"
+        },
+        "coverImage": {
+          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/nx100080-OywzGKBBclq0.jpg"
+        },
+        "chapters": null,
+        "siteUrl": "https://anilist.co/manga/100080"
+      }
+    }
+  ],
+  "characters": [
+    {
+      "id": 120800,
+      "name": {
+        "full": "Takagi",
+        "native": "高木"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/120800-fZe52KrIKqv6.jpg"
+      },
+      "siteUrl": "https://anilist.co/character/120800"
+    },
+    {
+      "id": 1743,
+      "name": {
+        "full": "Ai Haibara",
+        "native": "灰原哀"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b1743-yw1FloPUI7jO.png"
+      },
+      "siteUrl": "https://anilist.co/character/1743"
+    },
+    {
+      "id": 176754,
+      "name": {
+        "full": "Frieren",
+        "native": "フリーレン"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b176754-PCnpqIOkjhFk.png"
+      },
+      "siteUrl": "https://anilist.co/character/176754"
+    },
+    {
+      "id": 74850,
+      "name": {
+        "full": "Tamako Kitashirakawa",
+        "native": "北白川たまこ"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b74850-D8ksLbb9p9cw.png"
+      },
+      "siteUrl": "https://anilist.co/character/74850"
+    },
+    {
+      "id": 33221,
+      "name": {
+        "full": "Sora Kasugano",
+        "native": "春日野穹"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b33221-V9J6VWNBbDqr.png"
+      },
+      "siteUrl": "https://anilist.co/character/33221"
+    },
+    {
+      "id": 264094,
+      "name": {
+        "full": "Uta",
+        "native": "ウタ"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b264094-vsz8FFCxivzA.png"
+      },
+      "siteUrl": "https://anilist.co/character/264094"
+    },
+    {
+      "id": 89641,
+      "name": {
+        "full": "Aoba Suzukaze",
+        "native": "涼風青葉"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b89641-nVvsn6uqzt2z.png"
+      },
+      "siteUrl": "https://anilist.co/character/89641"
+    },
+    {
+      "id": 89576,
+      "name": {
+        "full": "Sagiri Izumi",
+        "native": "和泉紗霧"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b89576-lw430mWycPAg.png"
+      },
+      "siteUrl": "https://anilist.co/character/89576"
+    },
+    {
+      "id": 121514,
+      "name": {
+        "full": "Mitsuha Miyamizu",
+        "native": "宮水三葉"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b121514-MGI7JRluscpz.png"
+      },
+      "siteUrl": "https://anilist.co/character/121514"
+    },
+    {
+      "id": 139710,
+      "name": {
+        "full": "Hina Amano",
+        "native": "天野陽菜"
+      },
+      "image": {
+        "large": "https://s4.anilist.co/file/anilistcdn/character/large/b139710-EnN2wXd5YeDb.png"
+      },
+      "siteUrl": "https://anilist.co/character/139710"
+    }
+  ],
+  "favorites": [
+    {
+      "id": 16417,
+      "title": {
+        "native": "たまこまーけっと",
+        "romaji": "Tamako Market",
+        "english": "Tamako Market"
+      },
+      "coverImage": {
+        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/nx16417-r8Njy5UnwvDE.png"
+      },
+      "siteUrl": "https://anilist.co/anime/16417"
+    },
+    {
+      "id": 100080,
+      "title": {
+        "native": "お兄ちゃんはおしまい！",
+        "romaji": "Onii-chan wa Oshimai!",
+        "english": "ONIMAI: I'm Now Your Sister!"
+      },
+      "coverImage": {
+        "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/nx100080-OywzGKBBclq0.jpg"
+      },
+      "siteUrl": "https://anilist.co/manga/100080"
+    }
+  ]
+}

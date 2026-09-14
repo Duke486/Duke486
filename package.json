@@ -1,0 +1,12 @@
+{
+  "name": "duke486-profile",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "cards:github": "node scripts/github.mjs",
+    "test": "python -m unittest discover -s tests -v"
+  },
+  "dependencies": {
+    "@stats-organization/github-readme-stats-core": "2.2.0"
+  }
+}

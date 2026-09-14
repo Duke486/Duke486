@@ -1,0 +1,86 @@
+name: Refresh profile cards
+
+on:
+  schedule:
+    - cron: '23 1 * * *' # 09:23 Asia/Shanghai
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'profile.json'
+      - 'scripts/**'
+      - 'tests/**'
+      - 'package*.json'
+      - 'assets/art/**'
+      - '.github/workflows/profile.yml'
+
+concurrency:
+  group: profile-cards
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: '3.13'
+      - name: Install pinned card renderer
+        run: npm ci --ignore-scripts --no-audit --no-fund
+      - name: Test snapshot protection
+        run: python -m unittest discover -s tests -v
+      - name: Generate GitHub cards
+        id: github
+        continue-on-error: true
+        timeout-minutes: 8
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/github.mjs
+      - name: Publish healthy GitHub module
+        id: github_publish
+        if: steps.github.outcome == 'success'
+        continue-on-error: true
+        run: python scripts/profile.py publish-github
+      - name: Update AniList and Steam independently
+        id: interests
+        continue-on-error: true
+        env:
+          STEAM_TOKEN: ${{ secrets.STEAM_TOKEN }}
+        run: python scripts/profile.py interests
+      - name: Generate design and validate all visible assets
+        run: |
+          python scripts/profile.py design
+          python scripts/profile.py validate
+      - name: Commit healthy snapshots
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/design assets/github assets/anilist assets/steam README.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh profile snapshots [skip ci]'
+            git push
+          fi
+      - name: Report partial failures
+        if: always()
+        env:
+          GH_OUTCOME: ${{ steps.github.outcome }}
+          PUBLISH_OUTCOME: ${{ steps.github_publish.outcome }}
+          INTERESTS_OUTCOME: ${{ steps.interests.outcome }}
+        run: |
+          echo 'Cards are generated as local SVG snapshots. Failed modules retain the last healthy snapshot.' >> "$GITHUB_STEP_SUMMARY"
+          if [ "$GH_OUTCOME" != success ] || [ "$PUBLISH_OUTCOME" != success ] || [ "$INTERESTS_OUTCOME" != success ]; then
+            echo 'One or more sources failed; inspect the errors above. Healthy modules were still eligible for publication.' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
