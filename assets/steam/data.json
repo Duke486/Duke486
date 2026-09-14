@@ -1,18 +1,18 @@
 {
   "name": "Duke",
-  "avatar": "https://avatars.akamai.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
+  "avatar": "https://avatars.fastly.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
   "games": [
     {
       "name": "VRChat",
       "appid": 438100,
       "hours": "52",
-      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454"
+      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454"
     },
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "37",
-      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957"
+      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957"
     }
   ],
   "source": "steam_community_xml",
