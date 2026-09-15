@@ -98,9 +98,9 @@ class SnapshotProtection(unittest.TestCase):
         self.assertGreaterEqual(len(paths), 32)
         for path in paths:
             root = p.ET.parse(path).getroot()
-            width = 82 if path.name.startswith('character-') else 128
+            width = 105 if path.name.startswith('character-') else 128
             self.assertEqual((root.get('width'), root.get('height')), (str(width), '148'), path.name)
-            if width == 82:
+            if width == 105:
                 portrait = root.find('.//'+p.NS+'image')
                 self.assertEqual(portrait.get('preserveAspectRatio'), 'xMidYMid meet')
                 self.assertGreater(float(portrait.get('height')), float(portrait.get('width')))
