@@ -43,7 +43,7 @@ Nyaa(=・ω・=)~ 这里是 Duke486！Meow( · ω · )~ here is Duke486!
 
 ### Steam
 
-<a href="https://steamcommunity.com/profiles/76561198404562076/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/steam/steam.dark.svg?v=949136eb60ef"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/steam/steam.light.svg?v=ee57e602ec66" alt="Steam 游戏档案 · Duke" width="420" align="top"></picture></a>
+<a href="https://steamcommunity.com/profiles/76561198404562076/"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/steam/steam.dark.svg?v=3d0db2e305b7"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/steam/steam.light.svg?v=50e93dabe374" alt="Steam 游戏档案 · Duke" width="420" align="top"></picture></a>
 
 ### A few favorites
 
@@ -55,8 +55,8 @@ Nyaa(=・ω・=)~ 这里是 Duke486！Meow( · ω · )~ here is Duke486!
 ### Currently reading
 
 <p>
-<a href="https://anilist.co/manga/97700"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-0.dark.svg?v=16e31b665956"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-0.light.svg?v=f32ceed438ee" alt="CITY · 已读 0 话" width="380" align="top"></picture></a>
-<a href="https://anilist.co/manga/100080"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-1.dark.svg?v=4268f941d968"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-1.light.svg?v=cb00d0ae13f6" alt="お兄ちゃんはおしまい！ · 已读 35 话" width="380" align="top"></picture></a>
+<a href="https://anilist.co/manga/97700"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-0.dark.svg?v=e26cbfaa060c"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-0.light.svg?v=52d473c44492" alt="CITY · 已读 0 话" width="380" align="top"></picture></a>
+<a href="https://anilist.co/manga/100080"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-1.dark.svg?v=a1cfd459fa1c"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/anilist/reading-1.light.svg?v=8a99e31ce4e2" alt="お兄ちゃんはおしまい！ · 已读 35 话" width="380" align="top"></picture></a>
 </p>
 
 ### Favorite characters
@@ -87,6 +87,6 @@ Nyaa(=・ω・=)~ 这里是 Duke486！Meow( · ω · )~ here is Duke486!
 
 ---
 
-<sub>最近成功更新：GitHub 2026-09-14 · AniList 2026-09-14 · Steam 2026-09-14。每日生成，数据以来源为准。</sub>
+<sub>最近成功更新：GitHub 2026-09-15 · AniList 2026-09-15 · Steam 2026-09-15。每日生成，数据以来源为准。</sub>
 
 <sub>水蓝与薄荷之间，继续做喜欢的事。 · [素材来源与维护说明](./docs/MAINTENANCE.md)</sub>
