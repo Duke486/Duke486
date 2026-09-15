@@ -98,10 +98,10 @@ class SnapshotProtection(unittest.TestCase):
         self.assertGreaterEqual(len(paths), 32)
         for path in paths:
             root = p.ET.parse(path).getroot()
-            self.assertEqual((root.get('width'), root.get('height')), ('128', '108'), path.name)
+            self.assertEqual((root.get('width'), root.get('height')), ('128', '148'), path.name)
             with patch.object(p, 'ASSETS', p.ASSETS):
                 markup = p.image_md(str(path.relative_to(p.ASSETS)).rsplit('.', 2)[0], 'test', 128)
-            self.assertIn('width="128" height="108"', markup)
+            self.assertIn('width="128" height="148"', markup)
 
     def test_public_steam_snapshot_can_show_four_games(self):
         xml = '<profile><steamID64>'+p.CONFIG['steam_id']+'</steamID64><privacyState>public</privacyState><mostPlayedGames>'
@@ -111,6 +111,25 @@ class SnapshotProtection(unittest.TestCase):
         with patch.object(p, 'request', return_value=(xml.encode(), 'text/xml')):
             result = p.steam_community()
         self.assertEqual([g['appid'] for g in result['games']], [0, 1, 2, 3])
+
+    def test_steam_retains_verified_fourth_game_when_recent_list_shrinks(self):
+        games = [{'appid':n,'name':f'Game {n}','hours':n,'image':'https://example.com/image.png'} for n in range(4)]
+        fresh = {'games':games[:3], 'name':'Duke', 'source':'steam_community_xml'}
+        old = {'date':'2026-09-14', 'games':games}
+        with patch.dict(p.os.environ, {'STEAM_TOKEN':''}), patch.object(p,'steam_community',return_value=fresh), patch.object(p,'read_data',return_value=old), patch.object(p,'image_uri',return_value='data:image/png;base64,AA=='), patch.object(p,'promote') as publish:
+            p.steam()
+        result=json.loads(publish.call_args.args[1]['data.json'])
+        self.assertEqual([g['appid'] for g in result['games']], [0,1,2,3])
+        self.assertEqual(result['games'][3]['observed_at'], '2026-09-14')
+
+    def test_requested_copy_is_removed_and_typewriter_is_animated(self):
+        readme=(p.ROOT/'README.md').read_text(encoding='utf-8')
+        for copy in ['项目导航 · 文字版','公开档案中的游戏','收藏与进度来自','最近成功更新：']:
+            self.assertNotIn(copy, readme)
+        svg=p.ET.parse(p.ASSETS/'design/typing.light.svg').getroot()
+        self.assertEqual(len(svg.findall('.//'+p.NS+'g')), 2)
+        self.assertTrue(any(a.get('attributeName')=='width' and a.get('calcMode')=='discrete' for a in svg.iter(p.NS+'animate')))
+        self.assertIn('design/typing.light.svg', readme)
 
 
 if __name__=='__main__':unittest.main()

@@ -16,10 +16,10 @@ const cards = [
   ...config.projects.map(p => [p.name, pin, {username:config.github, repo:p.name}, '/api/pin/']),
   ['hdu-cs-wiki', pin, {username:'camera-2018',repo:'hdu-cs-wiki',show_owner:'true'}, '/api/pin/']
 ];
-for (const [name, renderer, options, route] of cards) {
+for (const [index, [name, renderer, options, route]] of cards.entries()) {
   for (const [theme, t] of Object.entries(config.themes)) {
     const query = {...options, card_width:'400', title_color:t.blue, text_color:t.ink, icon_color:t.mint,
-      bg_color:t.background, border_color:t.line, border_radius:'6', disable_animations:'true', description_lines_count:'3'};
+      bg_color:theme === 'light' ? ['E0F8F3','FFF2D9','E6F2FF','F3E8FF','FFE8EF','EBF6DA','E0F6FC'][index] : ['193D3A','403725','203648','352B48','442D3A','2F3D28','1B3944'][index], hide_border:'true', border_radius:'18', disable_animations:'true', description_lines_count:'3'};
     let result;
     if (bootstrap) {
       const response = await fetch('https://github-stats-extended.vercel.app'+route+'?'+new URLSearchParams(query), {signal:AbortSignal.timeout(45000)});

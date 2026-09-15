@@ -78,12 +78,12 @@
           class="card-bg"
           x="0.5"
           y="0.5"
-          rx="6"
+          rx="18"
           height="99%"
-          stroke="#BDDFE6"
+          stroke="#e4e2e2"
           width="399"
-          fill="#F6FCFE"
-          stroke-opacity="1"
+          fill="#E6F2FF"
+          stroke-opacity="0"
         />
 
         

@@ -108,20 +108,36 @@ def picture(uri, x, y, width, height, ident='cover', radius=12):
     return f'<defs><clipPath id="{ident}"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath></defs><image href="{uri}" x="{x}" y="{y}" width="{width}" height="{height}" preserveAspectRatio="xMidYMid slice" clip-path="url(#{ident})"/>'
 
 
-def small_card(uri, title, theme, detail='', portrait=False):
-    """One footprint for all interest items; no parent CSS needed on GitHub."""
+PALETTES = [
+    ('DDF8F2','A5E7DE','087F8C'), ('FFF0D1','FFD27A','A95D13'),
+    ('EAE5FF','CEBEFF','7152B5'), ('FFE4EB','FFB7CD','B74475'),
+    ('DDF3FF','A5DDFF','217BA9'), ('E9F7D5','C2E69B','54812C')]
+
+
+def small_card(uri, title, theme, detail='', portrait=False, index=0, kind='cover'):
+    """Small collectible tiles, with artwork and captions held together by color."""
+    pale, strong, accent = PALETTES[index % len(PALETTES)]
+    surface = pale if theme == 'light' else ['203D40','443627','322F49','472D3C','233B4D','303F29'][index % 6]
+    body = f'<rect x="3" y="3" width="122" height="142" rx="16" fill="#{surface}"/>'
+    body += f'<path d="M88 3h21q16 0 16 16v18Q107 22 88 3" fill="#{strong}" opacity=".7"/>'
+    body += f'<circle cx="14" cy="132" r="2" fill="#{accent}" opacity=".5"/>'
     if portrait:
-        # Show the face without stretching a tall poster across the phone.
-        body = picture(uri, 34, 5, 60, 64, radius=3).replace('xMidYMid slice', 'xMidYMin slice')
+        body += picture(uri, 11, 11, 106, 91, radius=12).replace('xMidYMid slice','xMidYMin slice')
+    elif kind == 'game':
+        body += picture(uri, 9, 23, 110, 67, radius=9).replace('xMidYMid slice','xMidYMid meet')
+        body += f'<path d="M19 12h12m-6-6v12" stroke="#{accent}" stroke-width="2" stroke-linecap="round" opacity=".65"/>'
     else:
-        # Keep the whole cover/game artwork; the quiet background fills letterboxing.
-        body = picture(uri, 8, 5, 112, 64, radius=3).replace('xMidYMid slice', 'xMidYMid meet')
+        body += f'<rect x="31" y="12" width="66" height="94" rx="5" fill="#{strong}" opacity=".6" transform="rotate(5 64 59)"/>'
+        body += picture(uri, 32, 8, 64, 96, radius=4).replace('xMidYMid slice','xMidYMid meet')
     for n, line in enumerate(wrap(title, 18, 1 if detail else 2)):
-        body += text(64, 85+n*15, line, 12, 'ink', 500, theme, 'middle')
+        body += text(64, 120+n*15, line, 12, 'ink', 600, theme, 'middle')
     if detail:
-        body += text(64, 101, detail, 10, 'muted', 400, theme, 'middle')
-    svg = card(128, 108, title+(' · '+detail if detail else ''), body, theme)
-    # A collection of pictures needs spacing, not a box around every picture.
+        body += text(64, 136, detail, 10, 'muted', 400, theme, 'middle')
+    return bare_svg(128, 148, title+(' · '+detail if detail else ''), body, theme)
+
+
+def bare_svg(width, height, title, body, theme='light'):
+    svg = card(width, height, title, body, theme)
     return re.sub(r'<rect x="\.5"[^>]+/>', '', svg, count=1)
 
 
@@ -203,12 +219,12 @@ def anilist():
         for index, entry in enumerate(reading):
             media = entry['media']
             progress = f"已读 {entry['progress']} 话" + (f" / {media['chapters']}" if media.get('chapters') else '')
-            files[f'reading-{index}.{theme}.svg'] = small_card(covers[media['id']], media_title(media), theme, progress)
+            files[f'reading-{index}.{theme}.svg'] = small_card(covers[media['id']], media_title(media), theme, progress, index=index+4)
         for index, char in enumerate(characters):
             name = char['name'].get('native') or char['name']['full']
-            files[f'character-{index}.{theme}.svg'] = small_card(portraits[char['id']], name, theme, portrait=True)
+            files[f'character-{index}.{theme}.svg'] = small_card(portraits[char['id']], name, theme, portrait=True, index=index)
         for index, media in enumerate(favorites):
-            files[f'favorite-{index}.{theme}.svg'] = small_card(favorite_images[media['id']], media_title(media), theme)
+            files[f'favorite-{index}.{theme}.svg'] = small_card(favorite_images[media['id']], media_title(media), theme, index=index+1)
     files['data.json'] = json.dumps({'date': today(), 'id': user['id'], 'name': user['name'], 'reading': reading, 'characters': characters, 'favorites': favorites}, ensure_ascii=False, indent=2)
     promote('anilist', files)
 
@@ -256,6 +272,17 @@ def steam():
         reason = 'api_key_not_configured'
         data = steam_community()
         print('Steam: using public community snapshot (API key not configured).')
+    previous = read_data('steam')
+    for game in data['games']:
+        game['observed_at'] = today()
+    ids = {g['appid'] for g in data['games']}
+    for old in previous.get('games', []):
+        if len(data['games']) >= CONFIG.get('steam_limit', 4): break
+        if old['appid'] not in ids:
+            old = dict(old, observed_at=old.get('observed_at', previous.get('date')))
+            data['games'].append(old); ids.add(old['appid'])
+    if len(data['games']) != CONFIG.get('steam_limit', 4):
+        raise SourceError('Four-game showcase unavailable; retain last complete showcase')
     data['note'] = reason
     data['date'] = today()
     data['steam_id'] = CONFIG['steam_id']
@@ -263,7 +290,7 @@ def steam():
     files = {}
     for theme in CONFIG['themes']:
         for index, game in enumerate(data['games']):
-            files[f'game-{index}.{theme}.svg'] = small_card(images[index], game['name'], theme, str(game['hours'])+' h 总时长')
+            files[f'game-{index}.{theme}.svg'] = small_card(images[index], game['name'], theme, str(game['hours'])+' h', index=index, kind='game')
     files['data.json'] = json.dumps(data, ensure_ascii=False, indent=2)
     promote('steam', files)
 
@@ -271,12 +298,57 @@ def steam():
 def design():
     art = 'data:image/png;base64,' + base64.b64encode((ASSETS/'art/miku-tamako.png').read_bytes()).decode()
     files = {}
+    sections = [('projects','Projects',0),('community','Community',4),('steam','Play time',1),('favorites','Favorites',3),('reading','On my bookshelf',5),('characters','Favorite characters',2),('github','GitHub',0),('trakt','Movie nights',3)]
     for theme, colors in CONFIG['themes'].items():
-        body = '<rect x="0" y="146" width="640" height="4" fill="url(#wash)"/>'
-        body += text(26, 79, 'Duke486', 52, 'ink', 600, theme)
-        body += text(28, 118, 'CODE · ACGN · PT', 20, 'mint', 400, theme)
-        body += f'<image href="{art}" x="430" y="0" width="200" height="145" preserveAspectRatio="xMidYMid meet"/>'
-        files[f'hero.{theme}.svg'] = card(640, 150, 'Duke486 · Code, ACGN and PT', body, theme)
+        base = '#E6FAF5' if theme == 'light' else '#163D40'
+        body = f'<rect x="3" y="3" width="794" height="204" rx="28" fill="{base}"/>'
+        body += '<defs><linearGradient id="rainbow"><stop stop-color="#66CBEF"/><stop offset=".32" stop-color="#54D5B9"/><stop offset=".66" stop-color="#FFD474"/><stop offset="1" stop-color="#F5A6CA"/></linearGradient></defs>'
+        body += '<defs><clipPath id="hero-edge"><rect x="3" y="3" width="794" height="204" rx="28"/></clipPath></defs><path d="M400 207C466 40 634 55 797 101V207Z" fill="url(#rainbow)" opacity=".48" clip-path="url(#hero-edge)"/>'
+        body += text(32, 93, 'Duke486', 60, 'ink', 700, theme)
+        body += text(35, 135, 'CS · ACGN · PT', 23, 'mint', 600, theme)
+        body += '<path d="M38 164h32m10 0h32m10 0h32m10 0h32" stroke="url(#rainbow)" stroke-width="8" stroke-linecap="round"/>'
+        body += '<path d="M414 37v18m-9-9h18M750 163v16m-8-8h16" stroke="#E9A549" stroke-width="3" stroke-linecap="round"/>'
+        body += f'<image href="{art}" x="535" y="-2" width="260" height="208" preserveAspectRatio="xMidYMid meet"/>'
+        files[f'hero.{theme}.svg'] = bare_svg(800, 210, 'Duke486 · Code, ACGN and PT', body, theme)
+        for key, label, i in sections:
+            pale, strong, accent = PALETTES[i]
+            body = f'<rect x="0" y="5" width="30" height="30" rx="10" fill="#{strong}"/>'
+            icons = {
+                'projects':'M11 14l-5 6 5 6m8-12 5 6-5 6m-3-14-3 16',
+                'community':'M8 20a5 5 0 0 1 5-5h4m-4 10h4a5 5 0 0 0 0-10m-6 5h8',
+                'steam':'M8 15h14l3 12-7-4h-6l-7 4zM10 17v5m-2-3h5m7-1v1m2 1v1',
+                'favorites':'M15 11l3 6 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z',
+                'reading':'M15 15Q9 11 5 14v15q5-3 10 0 5-3 10 0V14q-5-3-10 1v14',
+                'characters':'M15 28C-1 18 8 8 15 16c7-8 16 2 0 12z',
+                'github':'M8 26v-12m0 1h12v10m-12-3h12',
+                'trakt':'M6 13h18v16H6zM6 18h18m-12-5v5m6-5v5'}
+            body += f'<path d="{icons[key]}" fill="none" stroke="#{accent}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>'
+            body += text(40, 28, label, 20, 'ink', 700, theme)
+            files[f'section-{key}.{theme}.svg'] = bare_svg(260, 40, label, body, theme)
+        # Two alternating typewriter lines. Native SVG animation, no scripts or remote renderer.
+        lines = ['Nyaa(=・ω・=)~ 这里是 Duke486！', 'Meow( · ω · )~ here is Duke486!']
+        times, widths = [], []
+        for offset in (0, .5):
+            for n in range(33):
+                times.append(offset+n*.22/32); widths.append(n*350/32)
+            times.append(offset+.42); widths.append(350)
+            for n in range(1, 17):
+                times.append(offset+.42+n*.06/16); widths.append(350*(1-n/16))
+        times.append(1); widths.append(0)
+        key_times = ';'.join(f'{v:.6f}' for v in times)
+        values = ';'.join(f'{v:.2f}' for v in widths)
+        animation = f'values="{values}" keyTimes="{key_times}" calcMode="discrete" dur="10s" repeatCount="indefinite"'
+        body = f'<defs><clipPath id="typing"><rect x="0" y="0" width="0" height="44"><animate attributeName="width" {animation}/></rect></clipPath></defs>'
+        for i, line in enumerate(lines):
+            opacity = '1;0;0' if i == 0 else '0;1;1'
+            body += f'<g clip-path="url(#typing)" opacity="{1-i}"><animate attributeName="opacity" values="{opacity}" keyTimes="0;.5;1" calcMode="discrete" dur="10s" repeatCount="indefinite"/>'
+            body += text(2, 29, line, 21, 'mint' if i == 0 else 'blue', 500, theme).replace('<text ', '<text textLength="348" lengthAdjust="spacingAndGlyphs" ')+'</g>'
+        body += f'<rect y="9" width="2" height="24" fill="#45B9B0"><animate attributeName="x" {animation}/><animate attributeName="opacity" values="1;0;1" dur=".9s" repeatCount="indefinite"/></rect>'
+        files[f'typing.{theme}.svg'] = bare_svg(440,44,' / '.join(lines),body,theme)
+        body = '<rect x="3" y="3" width="314" height="112" rx="20" fill="'+('#FFE8EF' if theme == 'light' else '#472D3C')+'"/>'
+        body += '<path d="M22 36h48v45H22z" fill="#F47D9D"/><path d="M28 25l40-8 3 14-40 8z" fill="#FFBE74"/><path d="M43 47l15 11-15 11z" fill="white"/>'
+        body += text(88,50,'Trakt',24,'ink',700,theme)+text(88,77,'duke486  ↗',16,'muted',500,theme)
+        files[f'trakt.{theme}.svg'] = bare_svg(320,120,'Trakt · duke486',body,theme)
     promote('design', files)
 
 
@@ -292,51 +364,45 @@ def image_md(path, alt, width, link=None):
         return f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/assets/{path}.{theme}.svg?v={version}'
     # Wide images must retain automatic height when GitHub constrains their width.
     # Only the fixed-size thumbnails reserve an explicit height.
-    size = ' height="108"' if width == 128 else ''
+    size = ' height="148"' if width == 128 else ''
     pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}"{size} align="top"></picture>'
     return f'<a href="{esc(link)}">{pic}</a>' if link else pic
 
 
 def readme():
     a = read_data('anilist'); s = read_data('steam'); g = read_data('github')
-    lines = [image_md('design/hero', 'Duke486 的个人主页，Miku 与玉子的水蓝薄荷色插画', 640), '',
+    lines = [image_md('design/hero', 'Duke486 的个人主页，Miku 与玉子的水蓝薄荷色插画', 800), '',
              '> ~~24601♪~~ 雾', '',
              '**CS 毕业生，喜欢 ACGN 文化，PT 玩家。**', '',
-             'Nyaa(=・ω・=)~ 这里是 Duke486！Meow( · ω · )~ here is Duke486!', '',
+             image_md('design/typing', 'Nyaa(=・ω・=)~ 这里是 Duke486！ / Meow( · ω · )~ here is Duke486!', 440), '',
              '[✉ 欢迎来信](mailto:'+CONFIG['email']+') · [AniList](https://anilist.co/user/Duke486/) · [Steam](https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/)', '',
-             '## Projects', '', '<p>']
+             image_md('design/section-projects', 'Projects', 260), '', '<p>']
     for p in CONFIG['projects']:
         url = f'https://github.com/{CONFIG["github"]}/{p["name"]}'
         lines += [image_md('github/'+p['name'], p['name']+'：'+p['description'], 400, url)]
-    lines += ['</p>', '', '<details>', '<summary>项目导航 · 文字版</summary>', '']
-    for p in CONFIG['projects']:
-        lines += [f'- [{p["name"]}](https://github.com/{CONFIG["github"]}/{p["name"]}) — {p["description"]}']
-    lines += ['', '</details>', '', '### Community contribution', '',
-              '[HDU 计算机科学讲义 · camera-2018/hdu-cs-wiki](https://github.com/camera-2018/hdu-cs-wiki)', '',
+    lines += ['</p>', '', image_md('design/section-community', 'Community', 260), '',
               image_md('github/hdu-cs-wiki', '社区贡献：camera-2018 / hdu-cs-wiki', 400, 'https://github.com/camera-2018/hdu-cs-wiki'), '',
-              '## Interests', '', '### Steam', '', s.get('label', '公开档案中的游戏')+' · ['+s.get('name', 'Duke')+'](https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/)', '', '<p>']
+              image_md('design/section-steam', 'Play time', 260), '', '<p>']
     for index, game in enumerate(s.get('games', [])):
         lines += [image_md('steam/game-'+str(index), game['name'], 128, 'https://store.steampowered.com/app/'+str(game['appid'])+'/')]
-    lines += ['</p>', '', '### Favorites', '', '<p>']
+    lines += ['</p>', '', image_md('design/section-favorites', 'Favorites', 260), '', '<p>']
     for index, media in enumerate(a.get('favorites', [])):
         lines += [image_md('anilist/favorite-'+str(index), media_title(media), 128, media['siteUrl'])]
-    lines += ['</p>', '', '### Currently reading', '', '<p>']
+    lines += ['</p>', '', image_md('design/section-reading', 'On my bookshelf', 260), '', '<p>']
     for index, entry in enumerate(a.get('reading', [])):
         media = entry['media']
         lines += [image_md('anilist/reading-'+str(index), media_title(media)+' · 已读 '+str(entry['progress'])+' 话', 128, media['siteUrl'])]
     lines += ['</p>', '']
     if not a.get('reading'):
         lines += ['暂时没有公开的在读记录。[前往 AniList](https://anilist.co/user/Duke486/)。', '']
-    lines += ['### Favorite characters', '', '<p>']
+    lines += [image_md('design/section-characters', 'Favorite characters', 260), '', '<p>']
     for index, char in enumerate(a.get('characters', [])):
         name = char['name'].get('native') or char['name']['full']
         lines += [image_md('anilist/character-'+str(index), name, 128, char['siteUrl'])]
-    lines += ['</p>', '', '收藏与进度来自 [AniList](https://anilist.co/user/Duke486/)，保留原站排序。', '',
-              '## GitHub', '', '<p>', image_md('github/stats', 'Duke486 的 GitHub 统计', 400, 'https://github.com/Duke486'),
+    lines += ['</p>', '', image_md('design/section-trakt', 'Movie nights', 260), '', image_md('design/trakt', 'Trakt · duke486', 320, 'https://app.trakt.tv/profile/duke486?share=true'), '',
+              image_md('design/section-github', 'GitHub', 260), '', '<p>', image_md('github/stats', 'Duke486 的 GitHub 统计', 400, 'https://github.com/Duke486'),
               image_md('github/languages', '公开仓库语言分布，隐藏 Python', 400, 'https://github.com/Duke486?tab=repositories'), '</p>', '',
-              '<sub>语言分布来自公开源码仓库，不代表熟练程度；延续原设置隐藏 Python。</sub>', '',
-              '---', '', '<sub>最近成功更新：GitHub '+g.get('date','待更新')+' · AniList '+a.get('date','待更新')+' · Steam '+s.get('date','待更新')+'。每日生成，数据以来源为准。</sub>', '',
-              '<sub>[素材来源与维护说明](./docs/MAINTENANCE.md)</sub>', '']
+              '<sub>[素材与维护](./docs/MAINTENANCE.md)</sub>', '']
     content = '\n'.join(lines)
     raw_prefix = f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/'
     for url in re.findall(r'(?:src|srcset)="([^\"]+)"', content):

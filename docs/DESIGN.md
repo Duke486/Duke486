@@ -1,23 +1,18 @@
-# Profile design constraints
+# Playful profile design
 
-This is a personal developer profile and a small collection of interests, not a product landing page.
+A personal collection of code, games, anime and reading. Aqua and Miku green lead; peach, pink, lilac and lime provide a small rainbow across the collection.
 
-- Keep the requested aqua and Miku green. Use the gradient only as a quiet header accent. Use flat backgrounds, 6 px corners on information cards, no shadows or decorative bubbles.
-- Use plain section names. Avoid numbered editorial sections, generic welcome slogans, redundant captions and inspirational footer copy.
-- The header is 640 × 150. Preserve the personal cat greeting in actual README text, not tiny text inside the illustration.
-- Every interest item (Steam game, favorite title, reading entry, character) has a **128 × 108** SVG footprint. README declares both width and height. Interest images form an unboxed gallery, so each image does not need a border and background.
-- Character portraits are 60 × 64 within that footprint. Covers and game images use `meet` to preserve the whole artwork. Titles stay at 12 px and remain linked to their full source title. Progress and playtime use a quieter 10 px caption.
-- Steam has up to four real source records. No invented games or playtimes to fill empty slots.
-- Project and statistics cards remain wider for legibility; these contain substantially more text than an interest thumbnail.
-- Do not set HTML height attributes on the wide cards or header: GitHub caps their width on phones but leaves explicit height intact, creating letterboxing. Fixed height applies only to the 128 px thumbnails.
+- Interest tiles are 128 × 148 px, with 3 px outer spacing and a borderless rounded pastel surface. Character portraits are 106 × 91; covers use 64 × 96 and preserve the whole artwork; game logos are contained, not cropped.
+- Each tile holds its image and caption together. Do not remove all surfaces and leave tiny images floating in wide whitespace. Do not return to giant portrait cards.
+- The header is 800 × 210, with the original Miku/Tamako artwork and a clipped rainbow wave. Section labels use small topic-specific line icons.
+- Preserve the alternating Chinese/English typewriter SVG. It uses native SVG discrete animation for type, hold, erase and language switch, with a moving blinking cursor. The original wording is retained.
+- Keep the profile terse. No duplicate text navigation, source-method explanations, update-date boilerplate or public-profile disclaimers on the main page. Details belong in maintenance documentation.
+- Steam displays four verified games. When the current source offers fewer than four, retain previously verified entries, preserving per-game observed_at. Never invent a game or playtime.
+- Trakt currently exposes a private profile. Two tested public widgets returned empty content. Use a designed profile-link card; do not display empty widgets or claim access to private history.
+- Fixed height is only for small tiles. Wide images use automatic height so GitHub mobile padding does not produce letterboxing.
 
-## Required visual checks
+## Visual acceptance
 
-Read actual `innerWidth` / `innerHeight` after setting the browser viewport. A successful resize API call alone is not evidence of phone testing. At 360 × 800 and 390 × 844, measure rendered image rectangles and inspect screenshots. Interest cards must be 128 × 108, fit two columns, remain under 14% of viewport height, and produce no horizontal page overflow. Inspect both themes. Check the published GitHub page as well as the local preview; GitHub sanitizes markup and may apply different CSS.
+Inspect the full composition, not just individual SVG bounds. Confirm the actual viewport before measuring. Check real GitHub at 360 × 800 and 390 × 844: interest tiles must stay 128 × 148 and two columns, not fill half the viewport. Check desktop, light/dark, complete captions, preserved image ratios and the typewriter at different points in its cycle.
 
-## Research used
-
-- [NN/g: Cards: UI-Component Definition](https://www.nngroup.com/articles/cards-component/) — cards consume space; homogeneous image collections can use a gallery without an enclosing box for each image.
-- [The Crit: Does Your AI-Built App Look Vibe-Coded?](https://thecrit.co/resources/does-your-ai-built-app-look-vibe-coded) — diagnose excessive card styling, generic decoration and weak hierarchy; direct visual choices toward the content.
-
-These principles guide this revision, not a claim that a particular color or radius can objectively prove whether a design was AI-generated.
+This supersedes the overly austere previous version. Removing generic decoration does not mean removing color, grouping, personality or the original animation.
