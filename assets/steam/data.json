@@ -19,17 +19,11 @@
       "appid": 3430470,
       "hours": "0.8",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3430470/3d989414f34a9a5bba9c4ebc706c059105c890e0/capsule_184x69.jpg?t=1789121700"
-    },
-    {
-      "name": "Scritchy Scratchy",
-      "appid": 3948120,
-      "hours": "25",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3948120/2dbc15d41960cf963c27e2b22f906e0e6dd5a980/capsule_184x69.jpg?t=1789022460"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
-  "note": "official_api_unavailable",
+  "note": "api_key_not_configured",
   "date": "2026-09-15",
   "steam_id": "76561198404562076"
 }

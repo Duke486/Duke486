@@ -33,6 +33,12 @@ class SnapshotProtection(unittest.TestCase):
         p.promote('anilist',{'a.svg':new,'data.json':'{"date":"2026-09-14"}'},root=self.root)
         self.assertEqual((self.dest/'a.svg').read_text(),new)
 
+    def test_shorter_healthy_list_removes_only_generated_thumbnails(self):
+        (self.dest/'character-9.light.svg').write_text(self.good)
+        p.promote('anilist', {'character-0.light.svg':self.good, 'data.json':'{}'}, root=self.root)
+        self.assertFalse((self.dest/'character-9.light.svg').exists())
+        self.assertTrue((self.dest/'a.svg').exists())
+
     def test_external_image_is_rejected(self):
         with self.assertRaises(ValueError):
             p.validate_svg(p.card(100,100,'A','<image href="https://example.com/img.png"/>'))
@@ -91,10 +97,10 @@ class SnapshotProtection(unittest.TestCase):
         self.assertGreaterEqual(len(paths), 32)
         for path in paths:
             root = p.ET.parse(path).getroot()
-            self.assertEqual((root.get('width'), root.get('height')), ('144', '120'), path.name)
+            self.assertEqual((root.get('width'), root.get('height')), ('128', '108'), path.name)
             with patch.object(p, 'ASSETS', p.ASSETS):
-                markup = p.image_md(str(path.relative_to(p.ASSETS)).rsplit('.', 2)[0], 'test', 144)
-            self.assertIn('width="144" height="120"', markup)
+                markup = p.image_md(str(path.relative_to(p.ASSETS)).rsplit('.', 2)[0], 'test', 128)
+            self.assertIn('width="128" height="108"', markup)
 
     def test_public_steam_snapshot_can_show_four_games(self):
         xml = '<profile><steamID64>'+p.CONFIG['steam_id']+'</steamID64><privacyState>public</privacyState><mostPlayedGames>'

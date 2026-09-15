@@ -112,15 +112,15 @@ def small_card(uri, title, theme, detail='', portrait=False):
     """One footprint for all interest items; no parent CSS needed on GitHub."""
     if portrait:
         # Show the face without stretching a tall poster across the phone.
-        body = picture(uri, 40, 6, 64, 74, radius=3).replace('xMidYMid slice', 'xMidYMin slice')
+        body = picture(uri, 34, 5, 60, 64, radius=3).replace('xMidYMid slice', 'xMidYMin slice')
     else:
         # Keep the whole cover/game artwork; the quiet background fills letterboxing.
-        body = picture(uri, 8, 6, 128, 74, radius=3).replace('xMidYMid slice', 'xMidYMid meet')
-    for n, line in enumerate(wrap(title, 20, 1 if detail else 2)):
-        body += text(72, 96+n*15, line, 12, 'ink', 500, theme, 'middle')
+        body = picture(uri, 8, 5, 112, 64, radius=3).replace('xMidYMid slice', 'xMidYMid meet')
+    for n, line in enumerate(wrap(title, 18, 1 if detail else 2)):
+        body += text(64, 85+n*15, line, 12, 'ink', 500, theme, 'middle')
     if detail:
-        body += text(72, 112, detail, 10, 'muted', 400, theme, 'middle')
-    svg = card(144, 120, title+(' · '+detail if detail else ''), body, theme)
+        body += text(64, 101, detail, 10, 'muted', 400, theme, 'middle')
+    svg = card(128, 108, title+(' · '+detail if detail else ''), body, theme)
     # A collection of pictures needs spacing, not a box around every picture.
     return re.sub(r'<rect x="\.5"[^>]+/>', '', svg, count=1)
 
@@ -164,6 +164,12 @@ def promote(module, files, root=ROOT):
     dest.mkdir(parents=True, exist_ok=True)
     for name in files:
         os.replace(staging / name, dest / name)
+    # A source list can shrink. Remove only obsolete generated thumbnails after
+    # the complete healthy replacement has been validated and written.
+    if module in ('anilist', 'steam') and 'data.json' in files:
+        for path in dest.glob('*.svg'):
+            if re.fullmatch(r'(game|character|favorite|reading)-\d+\.(light|dark)\.svg', path.name) and path.name not in files:
+                path.unlink()
 
 
 QUERY = '''query($id: Int!) { User(id: $id) { id name siteUrl statistics { anime { count episodesWatched } manga { count chaptersRead } } favourites { anime(perPage: 4) { nodes { id title { native romaji english } coverImage { large } siteUrl } } manga(perPage: 4) { nodes { id title { native romaji english } coverImage { large } siteUrl } } characters(perPage: 10) { nodes { id name { full native } image { large } siteUrl } } } } MediaListCollection(userId: $id, type: MANGA, status: CURRENT, sort: UPDATED_TIME_DESC) { lists { entries { progress media { id title { native romaji english } coverImage { large } chapters siteUrl } } } } }'''
@@ -308,21 +314,21 @@ def readme():
               image_md('github/hdu-cs-wiki', '社区贡献：camera-2018 / hdu-cs-wiki', 400, 'https://github.com/camera-2018/hdu-cs-wiki'), '',
               '## Interests', '', '### Steam', '', s.get('label', '公开档案中的游戏')+' · ['+s.get('name', 'Duke')+'](https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/)', '', '<p>']
     for index, game in enumerate(s.get('games', [])):
-        lines += [image_md('steam/game-'+str(index), game['name'], 144, 'https://store.steampowered.com/app/'+str(game['appid'])+'/')]
+        lines += [image_md('steam/game-'+str(index), game['name'], 128, 'https://store.steampowered.com/app/'+str(game['appid'])+'/')]
     lines += ['</p>', '', '### Favorites', '', '<p>']
     for index, media in enumerate(a.get('favorites', [])):
-        lines += [image_md('anilist/favorite-'+str(index), media_title(media), 144, media['siteUrl'])]
+        lines += [image_md('anilist/favorite-'+str(index), media_title(media), 128, media['siteUrl'])]
     lines += ['</p>', '', '### Currently reading', '', '<p>']
     for index, entry in enumerate(a.get('reading', [])):
         media = entry['media']
-        lines += [image_md('anilist/reading-'+str(index), media_title(media)+' · 已读 '+str(entry['progress'])+' 话', 144, media['siteUrl'])]
+        lines += [image_md('anilist/reading-'+str(index), media_title(media)+' · 已读 '+str(entry['progress'])+' 话', 128, media['siteUrl'])]
     lines += ['</p>', '']
     if not a.get('reading'):
         lines += ['暂时没有公开的在读记录。[前往 AniList](https://anilist.co/user/Duke486/)。', '']
     lines += ['### Favorite characters', '', '<p>']
     for index, char in enumerate(a.get('characters', [])):
         name = char['name'].get('native') or char['name']['full']
-        lines += [image_md('anilist/character-'+str(index), name, 144, char['siteUrl'])]
+        lines += [image_md('anilist/character-'+str(index), name, 128, char['siteUrl'])]
     lines += ['</p>', '', '收藏与进度来自 [AniList](https://anilist.co/user/Duke486/)，保留原站排序。', '',
               '## GitHub', '', '<p>', image_md('github/stats', 'Duke486 的 GitHub 统计', 400, 'https://github.com/Duke486'),
               image_md('github/languages', '公开仓库语言分布，隐藏 Python', 400, 'https://github.com/Duke486?tab=repositories'), '</p>', '',

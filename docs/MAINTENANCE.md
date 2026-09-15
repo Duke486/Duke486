@@ -2,7 +2,7 @@
 
 水蓝 × Miku 绿，明暗双主题。简介文字与项目配置在 `profile.json` 和 `scripts/profile.py` 中；README 由脚本生成，修改正文时请同时修改模板。
 
-2026-09-15：兴趣区统一为 144 × 120 的无边框缩略图，Steam 拆为最多四个独立游戏。具体尺寸与手机验收规则见 [DESIGN.md](DESIGN.md)。
+2026-09-15：兴趣区统一为 128 × 108 的无边框缩略图，Steam 拆为最多四个独立游戏。具体尺寸与手机验收规则见 [DESIGN.md](DESIGN.md)。
 
 ## Sources and credits
 
