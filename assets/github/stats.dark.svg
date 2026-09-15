@@ -8,8 +8,8 @@
         role="img"
         aria-labelledby="descId"
       >
-        <title id="titleId">GitHub / Footprints, Rank: B-</title>
-        <desc id="descId">Total Stars Earned: 171, Total Commits  (last year) : 33, Total PRs: 6, Total Issues: 3, Contributed to (last year): 4</desc>
+        <title id="titleId">GitHub stats, Rank: B-</title>
+        <desc id="descId">Total Stars Earned: 172, Total Commits  (last year) : 33, Total PRs: 6, Total Issues: 3, Contributed to (last year): 8</desc>
         <style>
           .header {
             font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
@@ -73,7 +73,7 @@
         stroke-dashoffset: 251.32741228718345;
       }
       to {
-        stroke-dashoffset: 161.96878023549777;
+        stroke-dashoffset: 161.8834027497698;
       }
     }
   
@@ -105,13 +105,6 @@
         
         <defs>
           
-          <linearGradient
-            id="gradient"
-            gradientTransform="rotate(30)"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stop-color="#102632" />,<stop offset="100%" stop-color="#153F3A" />
-          </linearGradient>
           
         </defs>
         
@@ -121,11 +114,11 @@
           class="card-bg"
           x="0.5"
           y="0.5"
-          rx="16"
+          rx="6"
           height="99%"
           stroke="#305761"
           width="399"
-          fill="url(#gradient)"
+          fill="#102632"
           stroke-opacity="1"
         />
 
@@ -140,7 +133,7 @@
         y="0"
         class="header"
         data-testid="header"
-      >GitHub / Footprints</text>
+      >GitHub stats</text>
     </g>
       </g>
     
@@ -165,7 +158,7 @@
         x="224.01"
         y="12.5"
         data-testid="stars"
-      >171</text>
+      >172</text>
     </g>
   </g><g transform="translate(0, 27)">
     <g class="stagger" style="animation-delay: 600ms" transform="translate(25, 0)">
@@ -225,7 +218,7 @@
         x="224.01"
         y="12.5"
         data-testid="contribs"
-      >4</text>
+      >8</text>
     </g>
   </g>
     </svg>

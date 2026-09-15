@@ -11,15 +11,15 @@ loadConfigFromEnv({ PAT_1: token || '', FETCH_MULTI_PAGE_STARS: 'true' });
 const directory = new URL('../.staging/github/', import.meta.url);
 await fs.mkdir(directory, {recursive:true});
 const cards = [
-  ['stats', api, {username: config.github, custom_title: 'GitHub / Footprints', hide_rank:'true', show_icons:'true', line_height:'27', contribs_include_own_repos:'true'}, '/api'],
-  ['languages', topLangs, {username: config.github, layout:'compact', langs_count:'6', hide:config.hidden_languages.join(','), custom_title:'Languages / Public code'}, '/api/top-langs/'],
+  ['stats', api, {username: config.github, custom_title: 'GitHub stats', hide_rank:'true', show_icons:'true', line_height:'27', contribs_include_own_repos:'true'}, '/api'],
+  ['languages', topLangs, {username: config.github, layout:'compact', langs_count:'6', hide:config.hidden_languages.join(','), custom_title:'Languages'}, '/api/top-langs/'],
   ...config.projects.map(p => [p.name, pin, {username:config.github, repo:p.name}, '/api/pin/']),
   ['hdu-cs-wiki', pin, {username:'camera-2018',repo:'hdu-cs-wiki',show_owner:'true'}, '/api/pin/']
 ];
 for (const [name, renderer, options, route] of cards) {
   for (const [theme, t] of Object.entries(config.themes)) {
     const query = {...options, card_width:'400', title_color:t.blue, text_color:t.ink, icon_color:t.mint,
-      bg_color:`30,${t.background},${t.end}`, border_color:t.line, border_radius:'16', disable_animations:'true', description_lines_count:'3'};
+      bg_color:t.background, border_color:t.line, border_radius:'6', disable_animations:'true', description_lines_count:'3'};
     let result;
     if (bootstrap) {
       const response = await fetch('https://github-stats-extended.vercel.app'+route+'?'+new URLSearchParams(query), {signal:AbortSignal.timeout(45000)});

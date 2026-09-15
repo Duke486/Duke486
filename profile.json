@@ -12,6 +12,7 @@
   ],
   "community": "camera-2018/hdu-cs-wiki",
   "reading_limit": 2,
+  "steam_limit": 4,
   "character_limit": 10,
   "hidden_languages": ["Python"],
   "themes": {

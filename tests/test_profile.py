@@ -86,5 +86,24 @@ class SnapshotProtection(unittest.TestCase):
         self.assertIn('https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/hero.light.svg?v=',first)
         self.assertNotEqual(first,second)
 
+    def test_interest_assets_have_one_compact_footprint(self):
+        paths = list((p.ASSETS/'anilist').glob('*.svg')) + list((p.ASSETS/'steam').glob('game-*.svg'))
+        self.assertGreaterEqual(len(paths), 32)
+        for path in paths:
+            root = p.ET.parse(path).getroot()
+            self.assertEqual((root.get('width'), root.get('height')), ('144', '120'), path.name)
+            with patch.object(p, 'ASSETS', p.ASSETS):
+                markup = p.image_md(str(path.relative_to(p.ASSETS)).rsplit('.', 2)[0], 'test', 144)
+            self.assertIn('width="144" height="120"', markup)
+
+    def test_public_steam_snapshot_can_show_four_games(self):
+        xml = '<profile><steamID64>'+p.CONFIG['steam_id']+'</steamID64><privacyState>public</privacyState><mostPlayedGames>'
+        for n in range(6):
+            xml += f'<mostPlayedGame><gameName>Game {n}</gameName><gameLink>https://store.steampowered.com/app/{n}/</gameLink><hoursOnRecord>{n}</hoursOnRecord></mostPlayedGame>'
+        xml += '</mostPlayedGames></profile>'
+        with patch.object(p, 'request', return_value=(xml.encode(), 'text/xml')):
+            result = p.steam_community()
+        self.assertEqual([g['appid'] for g in result['games']], [0, 1, 2, 3])
+
 
 if __name__=='__main__':unittest.main()

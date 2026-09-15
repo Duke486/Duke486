@@ -100,12 +100,29 @@ def card(width, height, title, body, theme='light'):
     return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}" role="img" aria-label="{esc(title)}">
 <title>{esc(title)}</title><defs><linearGradient id="wash" x2="1" y2="1"><stop stop-color="#{t['background']}"/><stop offset="1" stop-color="#{t['end']}"/></linearGradient></defs>
 <style>text{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Microsoft YaHei','Noto Sans CJK JP',sans-serif}}</style>
-<rect x=".5" y=".5" width="{width-1}" height="{height-1}" rx="20" fill="url(#wash)" stroke="#{t['line']}"/>
+<rect x=".5" y=".5" width="{width-1}" height="{height-1}" rx="6" fill="#{t['background']}" stroke="#{t['line']}"/>
 {body}</svg>'''
 
 
 def picture(uri, x, y, width, height, ident='cover', radius=12):
     return f'<defs><clipPath id="{ident}"><rect x="{x}" y="{y}" width="{width}" height="{height}" rx="{radius}"/></clipPath></defs><image href="{uri}" x="{x}" y="{y}" width="{width}" height="{height}" preserveAspectRatio="xMidYMid slice" clip-path="url(#{ident})"/>'
+
+
+def small_card(uri, title, theme, detail='', portrait=False):
+    """One footprint for all interest items; no parent CSS needed on GitHub."""
+    if portrait:
+        # Show the face without stretching a tall poster across the phone.
+        body = picture(uri, 40, 6, 64, 74, radius=3).replace('xMidYMid slice', 'xMidYMin slice')
+    else:
+        # Keep the whole cover/game artwork; the quiet background fills letterboxing.
+        body = picture(uri, 8, 6, 128, 74, radius=3).replace('xMidYMid slice', 'xMidYMid meet')
+    for n, line in enumerate(wrap(title, 20, 1 if detail else 2)):
+        body += text(72, 96+n*15, line, 12, 'ink', 500, theme, 'middle')
+    if detail:
+        body += text(72, 112, detail, 10, 'muted', 400, theme, 'middle')
+    svg = card(144, 120, title+(' · '+detail if detail else ''), body, theme)
+    # A collection of pictures needs spacing, not a box around every picture.
+    return re.sub(r'<rect x="\.5"[^>]+/>', '', svg, count=1)
 
 
 def validate_svg(content):
@@ -179,27 +196,13 @@ def anilist():
     for theme in CONFIG['themes']:
         for index, entry in enumerate(reading):
             media = entry['media']
-            body = picture(covers[media['id']], 18, 18, 99, 142)
-            body += text(136, 39, 'READING  /  在读', 13, 'mint', 600, theme)
-            for n, line in enumerate(wrap(media_title(media), 23, 2)):
-                body += text(136, 71 + n*24, line, 18, 'ink', 600, theme)
             progress = f"已读 {entry['progress']} 话" + (f" / {media['chapters']}" if media.get('chapters') else '')
-            body += text(136, 127, progress, 16, 'muted', theme=theme)
-            body += text(136, 154, today(), 12, 'muted', theme=theme)
-            files[f'reading-{index}.{theme}.svg'] = card(380, 178, media_title(media)+' · '+progress, body, theme)
+            files[f'reading-{index}.{theme}.svg'] = small_card(covers[media['id']], media_title(media), theme, progress)
         for index, char in enumerate(characters):
             name = char['name'].get('native') or char['name']['full']
-            body = picture(portraits[char['id']], 10, 10, 132, 155, radius=13)
-            for n, line in enumerate(wrap(name, 16, 2)):
-                body += text(76, 188+n*21, line, 15, 'ink', 500, theme, 'middle')
-            files[f'character-{index}.{theme}.svg'] = card(152, 220, name, body, theme)
+            files[f'character-{index}.{theme}.svg'] = small_card(portraits[char['id']], name, theme, portrait=True)
         for index, media in enumerate(favorites):
-            category = 'FAVORITE ANIME' if index == 0 and user['favourites']['anime']['nodes'] else 'FAVORITE MANGA'
-            body = picture(favorite_images[media['id']], 18, 18, 99, 140)
-            body += text(136, 42, category, 12, 'mint', 600, theme)
-            for n, line in enumerate(wrap(media_title(media), 23, 3)):
-                body += text(136, 76+n*24, line, 18, 'ink', 600, theme)
-            files[f'favorite-{index}.{theme}.svg'] = card(380, 176, media_title(media), body, theme)
+            files[f'favorite-{index}.{theme}.svg'] = small_card(favorite_images[media['id']], media_title(media), theme)
     files['data.json'] = json.dumps({'date': today(), 'id': user['id'], 'name': user['name'], 'reading': reading, 'characters': characters, 'favorites': favorites}, ensure_ascii=False, indent=2)
     promote('anilist', files)
 
@@ -210,12 +213,12 @@ def steam_official(key):
     players = json_request(base+'ISteamUser/GetPlayerSummaries/v2/?'+query)['response']['players']
     if not players or players[0]['steamid'] != CONFIG['steam_id']:
         raise SourceError('Steam returned no matching player')
-    query = urllib.parse.urlencode({'key': key, 'steamid': CONFIG['steam_id'], 'count': 2})
+    query = urllib.parse.urlencode({'key': key, 'steamid': CONFIG['steam_id'], 'count': CONFIG.get('steam_limit', 4)})
     result = json_request(base+'IPlayerService/GetRecentlyPlayedGames/v1/?'+query)['response']
     if not isinstance(result, dict) or 'total_count' not in result:
         raise SourceError('Recent games unavailable or private')
     games = [{'name': g['name'], 'appid': g['appid'], 'hours': round(g.get('playtime_forever', 0)/60,1),
-              'image': f"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{g['appid']}/capsule_184x69.jpg"} for g in result.get('games', [])[:2]]
+              'image': f"https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{g['appid']}/capsule_184x69.jpg"} for g in result.get('games', [])[:CONFIG.get('steam_limit', 4)]]
     return {'name': players[0]['personaname'], 'avatar': players[0]['avatarfull'], 'games': games, 'source': 'steam_web_api', 'label': '最近游戏', 'note': None}
 
 
@@ -225,7 +228,7 @@ def steam_community():
     if doc.findtext('steamID64') != CONFIG['steam_id'] or doc.findtext('privacyState') != 'public':
         raise SourceError('Steam public profile unavailable')
     games = []
-    for game in doc.findall('./mostPlayedGames/mostPlayedGame')[:2]:
+    for game in doc.findall('./mostPlayedGames/mostPlayedGame')[:CONFIG.get('steam_limit', 4)]:
         appid = int((game.findtext('gameLink') or '').rstrip('/').rsplit('/', 1)[1])
         games.append({'name': game.findtext('gameName'), 'appid': appid,
                       'hours': game.findtext('hoursOnRecord') or '—', 'image': game.findtext('gameLogo')})
@@ -250,25 +253,11 @@ def steam():
     data['note'] = reason
     data['date'] = today()
     data['steam_id'] = CONFIG['steam_id']
-    avatar = image_uri(data['avatar'])
     images = [image_uri(g['image']) for g in data['games']]
     files = {}
     for theme in CONFIG['themes']:
-        body = picture(avatar, 22, 22, 54, 54, radius=27)
-        body += text(92, 45, data['name'], 23, 'ink', 600, theme)
-        body += text(92, 69, 'STEAM  /  '+data['label'], 13, 'muted', theme=theme)
-        y = 102
         for index, game in enumerate(data['games']):
-            body += picture(images[index], 22, y, 154, 60, 'game'+str(index), 9)
-            for n, line in enumerate(wrap(game['name'], 23, 2)):
-                body += text(192, y+20+n*21, line, 17, 'ink', 500, theme)
-            body += text(192, y+62, str(game['hours'])+' h 总时长', 13, 'muted', theme=theme)
-            y += 90
-        if not data['games']:
-            body += text(22, 133, '最近没有公开的游戏记录。', 17, 'muted', theme=theme)
-            y = 166
-        body += text(22, y+5, '档案快照 · '+today(), 12, 'muted', theme=theme)
-        files[f'steam.{theme}.svg'] = card(420, y+28, 'Steam · '+data['name']+' · '+data['label'], body, theme)
+            files[f'game-{index}.{theme}.svg'] = small_card(images[index], game['name'], theme, str(game['hours'])+' h 总时长')
     files['data.json'] = json.dumps(data, ensure_ascii=False, indent=2)
     promote('steam', files)
 
@@ -277,14 +266,11 @@ def design():
     art = 'data:image/png;base64,' + base64.b64encode((ASSETS/'art/miku-tamako.png').read_bytes()).decode()
     files = {}
     for theme, colors in CONFIG['themes'].items():
-        body = '<defs><linearGradient id="title"><stop stop-color="#3BB4E6"/><stop offset="1" stop-color="#24B99F"/></linearGradient></defs>'
-        body += f'<circle cx="830" cy="-15" r="235" fill="#{colors["blue"]}" opacity=".05"/><circle cx="45" cy="295" r="140" fill="#{colors["mint"]}" opacity=".06"/>'
-        body += text(44, 61, 'WELCOME TO MY LITTLE CORNER', 17, 'mint', 600, theme)
-        body += '<text x="40" y="162" font-size="90" font-weight="700" fill="url(#title)">Duke486</text>'
-        body += text(46, 215, 'Nyaa(=・ω・=)~   Meow( · ω · )~', 25, 'ink', 500, theme)
-        body += text(46, 266, 'CODE  /  ACGN  /  PT', 17, 'muted', 500, theme)
-        body += f'<image href="{art}" x="594" y="5" width="346" height="300" preserveAspectRatio="xMidYMid meet"/>'
-        files[f'hero.{theme}.svg'] = card(960, 320, 'Duke486 · Nyaa! Meow! · Code, ACGN and PT', body, theme)
+        body = '<rect x="0" y="146" width="640" height="4" fill="url(#wash)"/>'
+        body += text(26, 79, 'Duke486', 52, 'ink', 600, theme)
+        body += text(28, 118, 'CODE · ACGN · PT', 20, 'mint', 400, theme)
+        body += f'<image href="{art}" x="430" y="0" width="200" height="145" preserveAspectRatio="xMidYMid meet"/>'
+        files[f'hero.{theme}.svg'] = card(640, 150, 'Duke486 · Code, ACGN and PT', body, theme)
     promote('design', files)
 
 
@@ -298,18 +284,19 @@ def image_md(path, alt, width, link=None):
         file = ASSETS / f'{path}.{theme}.svg'
         version = hashlib.sha256(file.read_bytes()).hexdigest()[:12]
         return f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/assets/{path}.{theme}.svg?v={version}'
-    pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}" align="top"></picture>'
+    height = round(width * int(ET.parse(ASSETS / f'{path}.light.svg').getroot().get('height')) / int(ET.parse(ASSETS / f'{path}.light.svg').getroot().get('width')))
+    pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}" height="{height}" align="top"></picture>'
     return f'<a href="{esc(link)}">{pic}</a>' if link else pic
 
 
 def readme():
     a = read_data('anilist'); s = read_data('steam'); g = read_data('github')
-    lines = [image_md('design/hero', 'Duke486 的个人主页，Miku 与玉子的水蓝薄荷色插画', 960), '',
-             '# Hi, I’m Duke486 👋', '', '> ~~24601♪~~ 雾', '',
+    lines = [image_md('design/hero', 'Duke486 的个人主页，Miku 与玉子的水蓝薄荷色插画', 640), '',
+             '> ~~24601♪~~ 雾', '',
              '**CS 毕业生，喜欢 ACGN 文化，PT 玩家。**', '',
              'Nyaa(=・ω・=)~ 这里是 Duke486！Meow( · ω · )~ here is Duke486!', '',
              '[✉ 欢迎来信](mailto:'+CONFIG['email']+') · [AniList](https://anilist.co/user/Duke486/) · [Steam](https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/)', '',
-             '## 01 / Projects', '', '写一点代码，做一点喜欢的东西。', '', '<p>']
+             '## Projects', '', '<p>']
     for p in CONFIG['projects']:
         url = f'https://github.com/{CONFIG["github"]}/{p["name"]}'
         lines += [image_md('github/'+p['name'], p['name']+'：'+p['description'], 400, url)]
@@ -319,28 +306,29 @@ def readme():
     lines += ['', '</details>', '', '### Community contribution', '',
               '[HDU 计算机科学讲义 · camera-2018/hdu-cs-wiki](https://github.com/camera-2018/hdu-cs-wiki)', '',
               image_md('github/hdu-cs-wiki', '社区贡献：camera-2018 / hdu-cs-wiki', 400, 'https://github.com/camera-2018/hdu-cs-wiki'), '',
-              '## 02 / Off the keyboard', '', '游戏、漫画，还有喜欢的角色。', '', '### Steam', '',
-              image_md('steam/steam', 'Steam 游戏档案 · Duke', 420, 'https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/'), '',
-              '### A few favorites', '', '<p>']
+              '## Interests', '', '### Steam', '', s.get('label', '公开档案中的游戏')+' · ['+s.get('name', 'Duke')+'](https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/)', '', '<p>']
+    for index, game in enumerate(s.get('games', [])):
+        lines += [image_md('steam/game-'+str(index), game['name'], 144, 'https://store.steampowered.com/app/'+str(game['appid'])+'/')]
+    lines += ['</p>', '', '### Favorites', '', '<p>']
     for index, media in enumerate(a.get('favorites', [])):
-        lines += [image_md('anilist/favorite-'+str(index), media_title(media), 380, media['siteUrl'])]
+        lines += [image_md('anilist/favorite-'+str(index), media_title(media), 144, media['siteUrl'])]
     lines += ['</p>', '', '### Currently reading', '', '<p>']
     for index, entry in enumerate(a.get('reading', [])):
         media = entry['media']
-        lines += [image_md('anilist/reading-'+str(index), media_title(media)+' · 已读 '+str(entry['progress'])+' 话', 380, media['siteUrl'])]
+        lines += [image_md('anilist/reading-'+str(index), media_title(media)+' · 已读 '+str(entry['progress'])+' 话', 144, media['siteUrl'])]
     lines += ['</p>', '']
     if not a.get('reading'):
         lines += ['暂时没有公开的在读记录。[前往 AniList](https://anilist.co/user/Duke486/)。', '']
     lines += ['### Favorite characters', '', '<p>']
     for index, char in enumerate(a.get('characters', [])):
         name = char['name'].get('native') or char['name']['full']
-        lines += [image_md('anilist/character-'+str(index), name, 140, char['siteUrl'])]
+        lines += [image_md('anilist/character-'+str(index), name, 144, char['siteUrl'])]
     lines += ['</p>', '', '收藏与进度来自 [AniList](https://anilist.co/user/Duke486/)，保留原站排序。', '',
-              '## 03 / GitHub', '', '<p>', image_md('github/stats', 'Duke486 的 GitHub 统计', 400, 'https://github.com/Duke486'),
+              '## GitHub', '', '<p>', image_md('github/stats', 'Duke486 的 GitHub 统计', 400, 'https://github.com/Duke486'),
               image_md('github/languages', '公开仓库语言分布，隐藏 Python', 400, 'https://github.com/Duke486?tab=repositories'), '</p>', '',
               '<sub>语言分布来自公开源码仓库，不代表熟练程度；延续原设置隐藏 Python。</sub>', '',
               '---', '', '<sub>最近成功更新：GitHub '+g.get('date','待更新')+' · AniList '+a.get('date','待更新')+' · Steam '+s.get('date','待更新')+'。每日生成，数据以来源为准。</sub>', '',
-              '<sub>水蓝与薄荷之间，继续做喜欢的事。 · [素材来源与维护说明](./docs/MAINTENANCE.md)</sub>', '']
+              '<sub>[素材来源与维护说明](./docs/MAINTENANCE.md)</sub>', '']
     content = '\n'.join(lines)
     raw_prefix = f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/'
     for url in re.findall(r'(?:src|srcset)="([^\"]+)"', content):

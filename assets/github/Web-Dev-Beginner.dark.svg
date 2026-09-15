@@ -69,13 +69,6 @@
         
         <defs>
           
-          <linearGradient
-            id="gradient"
-            gradientTransform="rotate(30)"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop offset="0%" stop-color="#102632" />,<stop offset="100%" stop-color="#153F3A" />
-          </linearGradient>
           
         </defs>
         
@@ -85,11 +78,11 @@
           class="card-bg"
           x="0.5"
           y="0.5"
-          rx="16"
+          rx="6"
           height="99%"
           stroke="#305761"
           width="399"
-          fill="url(#gradient)"
+          fill="#102632"
           stroke-opacity="1"
         />
 
