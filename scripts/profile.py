@@ -290,8 +290,10 @@ def image_md(path, alt, width, link=None):
         file = ASSETS / f'{path}.{theme}.svg'
         version = hashlib.sha256(file.read_bytes()).hexdigest()[:12]
         return f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/assets/{path}.{theme}.svg?v={version}'
-    height = round(width * int(ET.parse(ASSETS / f'{path}.light.svg').getroot().get('height')) / int(ET.parse(ASSETS / f'{path}.light.svg').getroot().get('width')))
-    pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}" height="{height}" align="top"></picture>'
+    # Wide images must retain automatic height when GitHub constrains their width.
+    # Only the fixed-size thumbnails reserve an explicit height.
+    size = ' height="108"' if width == 128 else ''
+    pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}"{size} align="top"></picture>'
     return f'<a href="{esc(link)}">{pic}</a>' if link else pic
 
 

@@ -91,6 +91,7 @@ class SnapshotProtection(unittest.TestCase):
             second=p.image_md('design/hero','Title',960)
         self.assertIn('https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/hero.light.svg?v=',first)
         self.assertNotEqual(first,second)
+        self.assertNotIn(' height=', first)
 
     def test_interest_assets_have_one_compact_footprint(self):
         paths = list((p.ASSETS/'anilist').glob('*.svg')) + list((p.ASSETS/'steam').glob('game-*.svg'))

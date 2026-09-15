@@ -9,6 +9,7 @@ This is a personal developer profile and a small collection of interests, not a 
 - Character portraits are 60 × 64 within that footprint. Covers and game images use `meet` to preserve the whole artwork. Titles stay at 12 px and remain linked to their full source title. Progress and playtime use a quieter 10 px caption.
 - Steam has up to four real source records. No invented games or playtimes to fill empty slots.
 - Project and statistics cards remain wider for legibility; these contain substantially more text than an interest thumbnail.
+- Do not set HTML height attributes on the wide cards or header: GitHub caps their width on phones but leaves explicit height intact, creating letterboxing. Fixed height applies only to the 128 px thumbnails.
 
 ## Required visual checks
 
