@@ -2,7 +2,7 @@
 
 A personal collection of code, games, anime and reading. Aqua and Miku green lead; peach, pink, lilac and lime provide a small rainbow across the collection.
 
-- Interest tiles are 128 × 148 px, with 3 px outer spacing and a borderless rounded pastel surface. Character portraits are 106 × 91; covers use 64 × 96 and preserve the whole artwork; game logos are contained, not cropped.
+- Interest tiles are 128 × 148 px, with 3 px outer spacing and a borderless rounded pastel surface. Character tiles are 82 × 148 for three columns on phones; portraits are 70 × 106 with meet fitting, never cropped; covers use 64 × 96 and preserve the whole artwork; game logos are contained, not cropped.
 - Each tile holds its image and caption together. Do not remove all surfaces and leave tiny images floating in wide whitespace. Do not return to giant portrait cards.
 - The header is 800 × 210, with the original Miku/Tamako artwork and a clipped rainbow wave. Section labels use small topic-specific line icons.
 - Preserve the alternating Chinese/English typewriter SVG. It uses native SVG discrete animation for type, hold, erase and language switch, with a moving blinking cursor. The original wording is retained.
@@ -13,6 +13,6 @@ A personal collection of code, games, anime and reading. Aqua and Miku green lea
 
 ## Visual acceptance
 
-Inspect the full composition, not just individual SVG bounds. Confirm the actual viewport before measuring. Check real GitHub at 360 × 800 and 390 × 844: interest tiles must stay 128 × 148 and two columns, not fill half the viewport. Check desktop, light/dark, complete captions, preserved image ratios and the typewriter at different points in its cycle.
+Inspect the full composition, not just individual SVG bounds. Confirm the actual viewport before measuring. Check real GitHub at 360 × 800 and 390 × 844: other interest tiles stay 128 × 148 and two columns; character tiles stay 82 × 148 and three columns, not fill half the viewport. Check desktop, light/dark, complete captions, preserved image ratios and the typewriter at different points in its cycle.
 
 This supersedes the overly austere previous version. Removing generic decoration does not mean removing color, grouping, personality or the original animation.

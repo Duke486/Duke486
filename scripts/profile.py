@@ -118,12 +118,17 @@ def small_card(uri, title, theme, detail='', portrait=False, index=0, kind='cove
     """Small collectible tiles, with artwork and captions held together by color."""
     pale, strong, accent = PALETTES[index % len(PALETTES)]
     surface = pale if theme == 'light' else ['203D40','443627','322F49','472D3C','233B4D','303F29'][index % 6]
+    if portrait:
+        body = f'<rect x="3" y="3" width="76" height="142" rx="12" fill="#{surface}"/>'
+        body += f'<path d="M58 3h9q12 0 12 12v12Z" fill="#{strong}" opacity=".7"/>'
+        body += picture(uri, 6, 8, 70, 106, radius=8).replace('xMidYMid slice', 'xMidYMid meet')
+        for n, line in enumerate(wrap(title, 12, 2)):
+            body += text(41, 127+n*13, line, 11, 'ink', 600, theme, 'middle')
+        return bare_svg(82, 148, title, body, theme)
     body = f'<rect x="3" y="3" width="122" height="142" rx="16" fill="#{surface}"/>'
     body += f'<path d="M88 3h21q16 0 16 16v18Q107 22 88 3" fill="#{strong}" opacity=".7"/>'
     body += f'<circle cx="14" cy="132" r="2" fill="#{accent}" opacity=".5"/>'
-    if portrait:
-        body += picture(uri, 11, 11, 106, 91, radius=12).replace('xMidYMid slice','xMidYMin slice')
-    elif kind == 'game':
+    if kind == 'game':
         body += picture(uri, 9, 23, 110, 67, radius=9).replace('xMidYMid slice','xMidYMid meet')
         body += f'<path d="M19 12h12m-6-6v12" stroke="#{accent}" stroke-width="2" stroke-linecap="round" opacity=".65"/>'
     else:
@@ -364,7 +369,7 @@ def image_md(path, alt, width, link=None):
         return f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/assets/{path}.{theme}.svg?v={version}'
     # Wide images must retain automatic height when GitHub constrains their width.
     # Only the fixed-size thumbnails reserve an explicit height.
-    size = ' height="148"' if width == 128 else ''
+    size = ' height="148"' if width in (82, 128) else ''
     pic = f'<picture><source media="(prefers-color-scheme: dark)" srcset="{raw_url("dark")}"><img src="{raw_url("light")}" alt="{esc(alt)}" width="{width}"{size} align="top"></picture>'
     return f'<a href="{esc(link)}">{pic}</a>' if link else pic
 
@@ -398,11 +403,11 @@ def readme():
     lines += [image_md('design/section-characters', 'Favorite characters', 260), '', '<p>']
     for index, char in enumerate(a.get('characters', [])):
         name = char['name'].get('native') or char['name']['full']
-        lines += [image_md('anilist/character-'+str(index), name, 128, char['siteUrl'])]
+        lines += [image_md('anilist/character-'+str(index), name, 82, char['siteUrl'])]
     lines += ['</p>', '', image_md('design/section-trakt', 'Movie nights', 260), '', image_md('design/trakt', 'Trakt · duke486', 320, 'https://app.trakt.tv/profile/duke486?share=true'), '',
               image_md('design/section-github', 'GitHub', 260), '', '<p>', image_md('github/stats', 'Duke486 的 GitHub 统计', 400, 'https://github.com/Duke486'),
               image_md('github/languages', '公开仓库语言分布，隐藏 Python', 400, 'https://github.com/Duke486?tab=repositories'), '</p>', '',
-              '<sub>[素材与维护](./docs/MAINTENANCE.md)</sub>', '']
+              '']
     content = '\n'.join(lines)
     raw_prefix = f'https://raw.githubusercontent.com/{CONFIG["github"]}/{CONFIG["github"]}/main/'
     for url in re.findall(r'(?:src|srcset)="([^\"]+)"', content):

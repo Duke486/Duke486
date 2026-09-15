@@ -93,15 +93,20 @@ class SnapshotProtection(unittest.TestCase):
         self.assertNotEqual(first,second)
         self.assertNotIn(' height=', first)
 
-    def test_interest_assets_have_one_compact_footprint(self):
+    def test_interest_assets_keep_compact_footprints(self):
         paths = list((p.ASSETS/'anilist').glob('*.svg')) + list((p.ASSETS/'steam').glob('game-*.svg'))
         self.assertGreaterEqual(len(paths), 32)
         for path in paths:
             root = p.ET.parse(path).getroot()
-            self.assertEqual((root.get('width'), root.get('height')), ('128', '148'), path.name)
+            width = 82 if path.name.startswith('character-') else 128
+            self.assertEqual((root.get('width'), root.get('height')), (str(width), '148'), path.name)
+            if width == 82:
+                portrait = root.find('.//'+p.NS+'image')
+                self.assertEqual(portrait.get('preserveAspectRatio'), 'xMidYMid meet')
+                self.assertGreater(float(portrait.get('height')), float(portrait.get('width')))
             with patch.object(p, 'ASSETS', p.ASSETS):
-                markup = p.image_md(str(path.relative_to(p.ASSETS)).rsplit('.', 2)[0], 'test', 128)
-            self.assertIn('width="128" height="148"', markup)
+                markup = p.image_md(str(path.relative_to(p.ASSETS)).rsplit('.', 2)[0], 'test', width)
+            self.assertIn(f'width="{width}" height="148"', markup)
 
     def test_public_steam_snapshot_can_show_four_games(self):
         xml = '<profile><steamID64>'+p.CONFIG['steam_id']+'</steamID64><privacyState>public</privacyState><mostPlayedGames>'
@@ -124,7 +129,7 @@ class SnapshotProtection(unittest.TestCase):
 
     def test_requested_copy_is_removed_and_typewriter_is_animated(self):
         readme=(p.ROOT/'README.md').read_text(encoding='utf-8')
-        for copy in ['项目导航 · 文字版','公开档案中的游戏','收藏与进度来自','最近成功更新：']:
+        for copy in ['项目导航 · 文字版','公开档案中的游戏','收藏与进度来自','最近成功更新：','素材与维护']:
             self.assertNotIn(copy, readme)
         svg=p.ET.parse(p.ASSETS/'design/typing.light.svg').getroot()
         self.assertEqual(len(svg.findall('.//'+p.NS+'g')), 2)
