@@ -29,7 +29,7 @@
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
-  "note": "api_key_not_configured",
+  "note": "official_api_unavailable",
   "date": "2026-09-15",
   "steam_id": "76561198404562076"
 }
