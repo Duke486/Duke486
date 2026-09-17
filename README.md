@@ -19,7 +19,7 @@
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/section-community.dark.svg?v=52188a52e4fe"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/section-community.light.svg?v=ffbdbd174bfd" alt="Community" width="260" align="top"></picture>
 
-<a href="https://github.com/camera-2018/hdu-cs-wiki"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/hdu-cs-wiki.dark.svg?v=c5b2ae4968e9"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/hdu-cs-wiki.light.svg?v=9439047c0780" alt="社区贡献：camera-2018 / hdu-cs-wiki" width="400" align="top"></picture></a>
+<a href="https://github.com/camera-2018/hdu-cs-wiki"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/hdu-cs-wiki.dark.svg?v=441c9faebbdc"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/hdu-cs-wiki.light.svg?v=85e2f07b6c5c" alt="社区贡献：camera-2018 / hdu-cs-wiki" width="400" align="top"></picture></a>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/section-steam.dark.svg?v=5b0e93e11070"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/section-steam.light.svg?v=731ab6effdd6" alt="Play time" width="260" align="top"></picture>
 
