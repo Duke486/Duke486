@@ -7,21 +7,21 @@
       "appid": 438100,
       "hours": "53",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
-      "observed_at": "2026-09-19"
+      "observed_at": "2026-09-20"
     },
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "38",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-09-19"
+      "observed_at": "2026-09-20"
     },
     {
       "name": "PLATiNA :: LAB",
       "appid": 3430470,
       "hours": "0.8",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3430470/3d989414f34a9a5bba9c4ebc706c059105c890e0/capsule_184x69.jpg?t=1789121700",
-      "observed_at": "2026-09-19"
+      "observed_at": "2026-09-20"
     },
     {
       "name": "Scritchy Scratchy",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-09-19",
+  "date": "2026-09-20",
   "steam_id": "76561198404562076"
 }
