@@ -213,7 +213,7 @@ def anilist():
         if entry['media']['id'] not in seen:
             seen.add(entry['media']['id']); reading.append(entry)
     reading = reading[:CONFIG['reading_limit']]
-    characters = user['favourites']['characters']['nodes'][:CONFIG['character_limit']]
+    characters = [c for c in user['favourites']['characters']['nodes'] if c['id'] not in CONFIG.get('excluded_character_ids', [])][:CONFIG['character_limit']]
     # Fetch all image bytes before committing any card or metadata.
     covers = {entry['media']['id']: image_uri(entry['media']['coverImage']['large']) for entry in reading}
     portraits = {entry['id']: image_uri(entry['image']['large']) for entry in characters}
@@ -310,11 +310,11 @@ def design():
         body += '<defs><linearGradient id="rainbow"><stop stop-color="#66CBEF"/><stop offset=".32" stop-color="#54D5B9"/><stop offset=".66" stop-color="#FFD474"/><stop offset="1" stop-color="#F5A6CA"/></linearGradient></defs>'
         body += '<defs><clipPath id="hero-edge"><rect x="3" y="3" width="794" height="204" rx="28"/></clipPath></defs><path d="M400 207C466 40 634 55 797 101V207Z" fill="url(#rainbow)" opacity=".48" clip-path="url(#hero-edge)"/>'
         body += text(32, 93, 'Duke486', 60, 'ink', 700, theme)
-        body += text(35, 135, 'CS · ACGN · PT', 23, 'mint', 600, theme)
+        body += text(35, 135, 'CS · ACGN', 23, 'mint', 600, theme)
         body += '<path d="M38 164h32m10 0h32m10 0h32m10 0h32" stroke="url(#rainbow)" stroke-width="8" stroke-linecap="round"/>'
         body += '<path d="M414 37v18m-9-9h18M750 163v16m-8-8h16" stroke="#E9A549" stroke-width="3" stroke-linecap="round"/>'
         body += f'<image href="{art}" x="535" y="-2" width="260" height="208" preserveAspectRatio="xMidYMid meet"/>'
-        files[f'hero.{theme}.svg'] = bare_svg(800, 210, 'Duke486 · Code, ACGN and PT', body, theme)
+        files[f'hero.{theme}.svg'] = bare_svg(800, 210, 'Duke486 · Code and ACGN', body, theme)
         for key, label, i in sections:
             pale, strong, accent = PALETTES[i]
             body = f'<rect x="0" y="5" width="30" height="30" rx="10" fill="#{strong}"/>'
@@ -378,7 +378,7 @@ def readme():
     a = read_data('anilist'); s = read_data('steam'); g = read_data('github')
     lines = [image_md('design/hero', 'Duke486 的个人主页，Miku 与玉子的水蓝薄荷色插画', 800), '',
              '> ~~24601♪~~ 雾', '',
-             '**CS 毕业生，喜欢 ACGN 文化，PT 玩家。**', '',
+             '**CS 毕业生，喜欢 ACGN 文化。**', '',
              image_md('design/typing', 'Nyaa(=・ω・=)~ 这里是 Duke486！ / Meow( · ω · )~ here is Duke486!', 440), '',
              '[✉ 欢迎来信](mailto:'+CONFIG['email']+') · [AniList](https://anilist.co/user/Duke486/) · [Steam](https://steamcommunity.com/profiles/'+CONFIG['steam_id']+'/)', '',
              image_md('design/section-projects', 'Projects', 260), '', '<p>']

@@ -5,18 +5,51 @@
   "steam_id": "76561198404562076",
   "email": "duke_486@outlook.com",
   "projects": [
-    {"name": "Web-Dev-Beginner", "description": "从前端到后端，整理 Web 开发的入门路径。"},
-    {"name": "Miku-Skin-ClashVerge", "description": "给 Clash Verge 换上清透的初音未来主题。"},
-    {"name": "Galgamer_WebPlayer", "description": "用 Vue 3 与 Material Design 构建网页视觉小说播放器。"},
-    {"name": "Fluent-Toys", "description": "程序设计综合实践中的课程项目与探索。"}
+    {
+      "name": "Web-Dev-Beginner",
+      "description": "从前端到后端，整理 Web 开发的入门路径。"
+    },
+    {
+      "name": "koi-learn",
+      "description": "Koi 戀，讓每個人都戀上學習"
+    },
+    {
+      "name": "Galgamer_WebPlayer",
+      "description": "用 Vue 3 与 Material Design 构建网页视觉小说播放器。"
+    },
+    {
+      "name": "Fluent-Toys",
+      "description": "程序设计综合实践中的课程项目与探索。"
+    }
   ],
   "community": "camera-2018/hdu-cs-wiki",
   "reading_limit": 2,
   "steam_limit": 4,
   "character_limit": 10,
-  "hidden_languages": ["Python"],
+  "hidden_languages": [
+    "Python"
+  ],
   "themes": {
-    "light": {"background": "F6FCFE", "end": "E1F8F0", "ink": "173D50", "muted": "4C6F7B", "blue": "087DAA", "mint": "138C7E", "line": "BDDFE6"},
-    "dark": {"background": "102632", "end": "153F3A", "ink": "E8F8FC", "muted": "AACBD3", "blue": "82D9F7", "mint": "77E4CC", "line": "305761"}
-  }
+    "light": {
+      "background": "F6FCFE",
+      "end": "E1F8F0",
+      "ink": "173D50",
+      "muted": "4C6F7B",
+      "blue": "087DAA",
+      "mint": "138C7E",
+      "line": "BDDFE6"
+    },
+    "dark": {
+      "background": "102632",
+      "end": "153F3A",
+      "ink": "E8F8FC",
+      "muted": "AACBD3",
+      "blue": "82D9F7",
+      "mint": "77E4CC",
+      "line": "305761"
+    }
+  },
+  "excluded_character_ids": [
+    33221
+  ]
 }
