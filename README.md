@@ -65,7 +65,7 @@
 <picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/section-github.dark.svg?v=411aa9f68341"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/design/section-github.light.svg?v=41f7b7572771" alt="GitHub" width="260" align="top"></picture>
 
 <p>
-<a href="https://github.com/Duke486"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/stats.dark.svg?v=a840ca99539d"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/stats.light.svg?v=42d4a62e5387" alt="Duke486 的 GitHub 统计" width="400" align="top"></picture></a>
-<a href="https://github.com/Duke486?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/languages.dark.svg?v=e98187732d7c"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/languages.light.svg?v=5d359cb0cc69" alt="公开仓库语言分布，隐藏 Python" width="400" align="top"></picture></a>
+<a href="https://github.com/Duke486"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/stats.dark.svg?v=d117d883ea09"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/stats.light.svg?v=05f98c1c9621" alt="Duke486 的 GitHub 统计" width="400" align="top"></picture></a>
+<a href="https://github.com/Duke486?tab=repositories"><picture><source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/languages.dark.svg?v=6e1503759149"><img src="https://raw.githubusercontent.com/Duke486/Duke486/main/assets/github/languages.light.svg?v=6764b8b39401" alt="公开仓库语言分布，隐藏 Python" width="400" align="top"></picture></a>
 </p>
 
