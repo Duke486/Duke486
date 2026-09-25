@@ -7,14 +7,14 @@
       "appid": 438100,
       "hours": "53",
       "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
-      "observed_at": "2026-09-24"
+      "observed_at": "2026-09-25"
     },
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "38",
       "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-09-24"
+      "observed_at": "2026-09-25"
     },
     {
       "name": "PLATiNA :: LAB",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-09-24",
+  "date": "2026-09-25",
   "steam_id": "76561198404562076"
 }
