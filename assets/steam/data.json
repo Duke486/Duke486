@@ -1,6 +1,6 @@
 {
   "name": "Duke",
-  "avatar": "https://avatars.fastly.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
+  "avatar": "https://avatars.akamai.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
   "games": [
     {
       "name": "VRChat",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-02",
+  "date": "2026-10-03",
   "steam_id": "76561198404562076"
 }
