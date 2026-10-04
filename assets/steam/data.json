@@ -1,7 +1,14 @@
 {
   "name": "Duke",
-  "avatar": "https://avatars.akamai.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
+  "avatar": "https://avatars.fastly.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
   "games": [
+    {
+      "name": "Counter-Strike 2",
+      "appid": 730,
+      "hours": "17.2",
+      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1789251637",
+      "observed_at": "2026-10-04"
+    },
     {
       "name": "VRChat",
       "appid": 438100,
@@ -22,18 +29,11 @@
       "hours": "0.8",
       "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3430470/3d989414f34a9a5bba9c4ebc706c059105c890e0/capsule_184x69.jpg?t=1789121700",
       "observed_at": "2026-09-24"
-    },
-    {
-      "name": "Scritchy Scratchy",
-      "appid": 3948120,
-      "hours": "25",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3948120/2dbc15d41960cf963c27e2b22f906e0e6dd5a980/capsule_184x69.jpg?t=1789022460",
-      "observed_at": "2026-09-15"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-03",
+  "date": "2026-10-04",
   "steam_id": "76561198404562076"
 }
