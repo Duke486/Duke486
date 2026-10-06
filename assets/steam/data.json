@@ -1,13 +1,13 @@
 {
   "name": "Duke",
-  "avatar": "https://avatars.fastly.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
+  "avatar": "https://avatars.akamai.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
   "games": [
     {
       "name": "Counter-Strike 2",
       "appid": 730,
       "hours": "17.2",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1789251637",
-      "observed_at": "2026-10-05"
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1789251637",
+      "observed_at": "2026-10-06"
     },
     {
       "name": "VRChat",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-05",
+  "date": "2026-10-06",
   "steam_id": "76561198404562076"
 }
