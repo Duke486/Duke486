@@ -7,7 +7,7 @@
       "appid": 730,
       "hours": "17.2",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1789251637",
-      "observed_at": "2026-10-08"
+      "observed_at": "2026-10-09"
     },
     {
       "name": "VRChat",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-08",
+  "date": "2026-10-09",
   "steam_id": "76561198404562076"
 }
