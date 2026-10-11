@@ -7,7 +7,14 @@
       "appid": 730,
       "hours": "17.2",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1789251637",
-      "observed_at": "2026-10-10"
+      "observed_at": "2026-10-11"
+    },
+    {
+      "name": "THE FINALS",
+      "appid": 2073850,
+      "hours": "59",
+      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2073850/9adb8c82f6c262d024dc462904099a2041f2a030/capsule_184x69.jpg?t=1789034839",
+      "observed_at": "2026-10-11"
     },
     {
       "name": "VRChat",
@@ -22,18 +29,11 @@
       "hours": "38",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
       "observed_at": "2026-10-02"
-    },
-    {
-      "name": "PLATiNA :: LAB",
-      "appid": 3430470,
-      "hours": "0.8",
-      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/3430470/3d989414f34a9a5bba9c4ebc706c059105c890e0/capsule_184x69.jpg?t=1789121700",
-      "observed_at": "2026-09-24"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-10",
+  "date": "2026-10-11",
   "steam_id": "76561198404562076"
 }
