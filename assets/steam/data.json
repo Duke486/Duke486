@@ -6,15 +6,15 @@
       "name": "Counter-Strike 2",
       "appid": 730,
       "hours": "17.2",
-      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1789251637",
-      "observed_at": "2026-10-12"
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/730/942c04efaa5bc87afb6f2a97dbf17ac614c8a84d/capsule_184x69.jpg?t=1791824795",
+      "observed_at": "2026-10-13"
     },
     {
       "name": "THE FINALS",
       "appid": 2073850,
       "hours": "59",
       "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2073850/9adb8c82f6c262d024dc462904099a2041f2a030/capsule_184x69.jpg?t=1789034839",
-      "observed_at": "2026-10-12"
+      "observed_at": "2026-10-13"
     },
     {
       "name": "VRChat",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-12",
+  "date": "2026-10-13",
   "steam_id": "76561198404562076"
 }
