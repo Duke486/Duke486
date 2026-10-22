@@ -1,39 +1,39 @@
 {
   "name": "Duke",
-  "avatar": "https://avatars.fastly.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
+  "avatar": "https://avatars.akamai.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
   "games": [
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "39",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-10-21"
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
+      "observed_at": "2026-10-22"
     },
     {
       "name": "THE FINALS",
       "appid": 2073850,
       "hours": "59",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2073850/f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_184x69.jpg?t=1792501373",
-      "observed_at": "2026-10-21"
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/2073850/f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_184x69.jpg?t=1792501373",
+      "observed_at": "2026-10-22"
     },
     {
       "name": "VRChat",
       "appid": 438100,
       "hours": "53",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
-      "observed_at": "2026-10-21"
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
+      "observed_at": "2026-10-22"
     },
     {
       "name": "Google Earth VR",
       "appid": 348250,
       "hours": "0.1",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/348250/capsule_184x69.jpg?t=1508799201",
-      "observed_at": "2026-10-21"
+      "image": "https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/348250/capsule_184x69.jpg?t=1508799201",
+      "observed_at": "2026-10-22"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "steam_id": "76561198404562076"
 }
