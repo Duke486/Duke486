@@ -1,38 +1,38 @@
 {
-  "date": "2026-10-30",
+  "date": "2026-10-31",
   "id": 5123998,
   "name": "Duke486",
   "reading": [
     {
       "progress": 0,
       "media": {
-        "id": 97700,
+        "id": 85697,
         "title": {
-          "native": "CITY",
-          "romaji": "CITY",
-          "english": "CITY"
+          "native": "NEW GAME!",
+          "romaji": "NEW GAME!",
+          "english": "New Game!"
         },
         "coverImage": {
-          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/nx97700-Gvj77EXtkMLd.jpg"
+          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx85697-INZQiwnVZbmV.png"
         },
-        "chapters": 210,
-        "siteUrl": "https://anilist.co/manga/97700"
+        "chapters": 181,
+        "siteUrl": "https://anilist.co/manga/85697"
       }
     },
     {
-      "progress": 35,
+      "progress": 0,
       "media": {
-        "id": 100080,
+        "id": 152404,
         "title": {
-          "native": "お兄ちゃんはおしまい！",
-          "romaji": "Onii-chan wa Oshimai!",
-          "english": "ONIMAI: I'm Now Your Sister!"
+          "native": "時々ボソッとロシア語でデレる隣のアーリャさん",
+          "romaji": "Tokidoki Bosotto Rossiya-go de Dereru Tonari no Alya-san",
+          "english": "Alya Sometimes Hides Her Feelings in Russian"
         },
         "coverImage": {
-          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/nx100080-OywzGKBBclq0.jpg"
+          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/b152404-PeFLFZXXuVr2.jpg"
         },
         "chapters": null,
-        "siteUrl": "https://anilist.co/manga/100080"
+        "siteUrl": "https://anilist.co/manga/152404"
       }
     }
   ],
