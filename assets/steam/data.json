@@ -3,18 +3,25 @@
   "avatar": "https://avatars.fastly.steamstatic.com/dd6a66a735bfbcec5fd3175d737a2a88ce81c1e0_full.jpg",
   "games": [
     {
+      "name": "FINAL FANTASY VII REMAKE INTERGRADE",
+      "appid": 1462040,
+      "hours": "2.5",
+      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1462040/ec805ec87558eb40c712c7cca4eabc2e83cb57f7/capsule_184x69.jpg?t=1789446715",
+      "observed_at": "2026-11-09"
+    },
+    {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "40",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-11-08"
+      "observed_at": "2026-11-09"
     },
     {
       "name": "VRChat",
       "appid": 438100,
       "hours": "54",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
-      "observed_at": "2026-11-08"
+      "observed_at": "2026-11-09"
     },
     {
       "name": "Google Earth VR",
@@ -22,18 +29,11 @@
       "hours": "0.1",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/348250/capsule_184x69.jpg?t=1508799201",
       "observed_at": "2026-10-29"
-    },
-    {
-      "name": "THE FINALS",
-      "appid": 2073850,
-      "hours": "59",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2073850/f68c29ce93dd6eedf9d3c71c26a122e87a1c14c3/capsule_184x69.jpg?t=1792501373",
-      "observed_at": "2026-10-25"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-11-08",
+  "date": "2026-11-09",
   "steam_id": "76561198404562076"
 }
