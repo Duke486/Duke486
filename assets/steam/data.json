@@ -5,23 +5,23 @@
     {
       "name": "FINAL FANTASY VII REMAKE INTERGRADE",
       "appid": 1462040,
-      "hours": "2.5",
+      "hours": "2.6",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1462040/ec805ec87558eb40c712c7cca4eabc2e83cb57f7/capsule_184x69.jpg?t=1789446715",
-      "observed_at": "2026-11-10"
+      "observed_at": "2026-11-11"
     },
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "40",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-11-10"
+      "observed_at": "2026-11-11"
     },
     {
       "name": "VRChat",
       "appid": 438100,
       "hours": "54",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
-      "observed_at": "2026-11-10"
+      "observed_at": "2026-11-11"
     },
     {
       "name": "Google Earth VR",
@@ -34,6 +34,6 @@
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-11-10",
+  "date": "2026-11-11",
   "steam_id": "76561198404562076"
 }
