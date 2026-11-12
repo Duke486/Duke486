@@ -5,35 +5,35 @@
     {
       "name": "FINAL FANTASY VII REMAKE INTERGRADE",
       "appid": 1462040,
-      "hours": "2.6",
+      "hours": "2.9",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1462040/ec805ec87558eb40c712c7cca4eabc2e83cb57f7/capsule_184x69.jpg?t=1789446715",
-      "observed_at": "2026-11-11"
+      "observed_at": "2026-11-12"
+    },
+    {
+      "name": "Stellar Blade™",
+      "appid": 3489700,
+      "hours": "4.5",
+      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3489700/75914656cad450124a18fef914c5a5f4866ffb67/capsule_184x69.jpg?t=1776466244",
+      "observed_at": "2026-11-12"
     },
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "40",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-11-11"
+      "observed_at": "2026-11-12"
     },
     {
       "name": "VRChat",
       "appid": 438100,
       "hours": "54",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/438100/capsule_184x69.jpg?t=1762366454",
-      "observed_at": "2026-11-11"
-    },
-    {
-      "name": "Google Earth VR",
-      "appid": 348250,
-      "hours": "0.1",
-      "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/348250/capsule_184x69.jpg?t=1508799201",
-      "observed_at": "2026-10-29"
+      "observed_at": "2026-11-12"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-11-11",
+  "date": "2026-11-12",
   "steam_id": "76561198404562076"
 }
