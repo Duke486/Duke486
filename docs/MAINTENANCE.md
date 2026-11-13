@@ -2,12 +2,14 @@
 
 水蓝 × Miku 绿，明暗双主题。简介文字与项目配置在 `profile.json` 和 `scripts/profile.py` 中；README 由脚本生成，修改正文时请同时修改模板。
 
+2026-11-13：项目区前两项为 MangaUpscale、AniShelf；移除作品 Favorites 区，动漫与书籍按条目最近更新时间展示，保留角色收藏。
+
 2026-09-15：兴趣区改为 128 × 148 的无描边彩色收藏卡；恢复中英文交替打字机；Steam 固定四款已核实游戏。当前设计与验收规则见 [DESIGN.md](DESIGN.md)。
 
 ## Sources and credits
 
 - GitHub cards: [GitHub Stats Extended](https://github.com/stats-organization/github-stats-extended), MIT. This repository installs `@stats-organization/github-readme-stats-core@2.2.0`, the maintained renderer used by its official Action. A single Node process generates every theme and card, avoiding fourteen repeated Action installations. The npm lockfile pins transitive dependencies.
-- AniList: official GraphQL API, user ID **5123998**. Current reading and favorites follow the source account. Cover art and character portraits belong to their respective rights holders; their source URLs and item links are retained in `assets/anilist/data.json`. Images are embedded in the generated SVGs so profile visitors do not need to contact image hosts.
+- AniList: official GraphQL API, user ID **5123998**. Anime and books show the most recently updated list entries across all statuses, sorted by UPDATED_TIME_DESC. Only titles and covers are published for these lists; progress counts, statuses and update timestamps are not published. Favorite works are omitted; favorite characters follow the source account. Cover art and character portraits belong to their respective rights holders; their source URLs and item links are retained in `assets/anilist/data.json`. Images are embedded in the generated SVGs so profile visitors do not need to contact image hosts.
 - Steam: official Web API when `STEAM_TOKEN` is valid. If unavailable, the generator reads the public Steam Community XML and records that source in the snapshot metadata. This fallback does not claim live status or a precise two-week ranking. It displays lifetime hours from the source. The source and fallback reason are recorded in `assets/steam/data.json`.
 - Hero decoration: **AI-generated fan art**, using the built-in image generation tool; Hatsune Miku and Tamako Kitashirakawa are owned by their respective rights holders. It is decorative fan art, not an official illustration. Original generated PNG: `assets/art/miku-tamako.png`. The generation prompt is preserved in `docs/ART-PROMPT.md`.
 - Layout, glue code and custom interest cards were created for this profile. No code was copied from the evaluated Steam-card or AniCards projects.

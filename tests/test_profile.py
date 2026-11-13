@@ -57,6 +57,40 @@ class SnapshotProtection(unittest.TestCase):
             with self.assertRaises(p.SourceError):p.anilist()
             publish.assert_not_called()
 
+    def test_recent_lists_include_completed_entries_and_sort_by_update(self):
+        def entry(ident, updated, status):
+            return {'progress': 3, 'updatedAt': updated, 'status': status, 'media': {
+                'id': ident, 'title': {'native': str(ident)},
+                'coverImage': {'large': 'https://example.com/cover.png'}, 'siteUrl': 'https://anilist.co/anime/'+str(ident)}}
+        response = {'data': {'User': {'id': p.CONFIG['anilist_id'], 'name': 'Duke486',
+                    'favourites': {'characters': {'nodes': []}}},
+                    'reading': {'mediaList': [entry(1, 10, 'CURRENT'), entry(2, 30, 'COMPLETED')]},
+                    'watching': {'mediaList': [entry(3, 20, 'PAUSED'), entry(4, 40, 'COMPLETED')]}}}
+        with patch.object(p, 'json_request', return_value=response) as request, patch.object(p, 'image_uri', return_value='data:image/png;base64,AA=='), patch.object(p, 'promote') as publish:
+            p.anilist()
+        payload = request.call_args.args[1]
+        self.assertNotIn('status: CURRENT', payload['query'])
+        self.assertIn('type: ANIME, sort: UPDATED_TIME_DESC', payload['query'])
+        self.assertIn('type: MANGA, sort: UPDATED_TIME_DESC', payload['query'])
+        files = publish.call_args.args[1]
+        data = json.loads(files['data.json'])
+        self.assertEqual([e['media']['id'] for e in data['reading']], [2, 1])
+        self.assertEqual([e['media']['id'] for e in data['watching']], [4, 3])
+        self.assertIn('watching-0.dark.svg', files)
+        self.assertEqual(set(data['reading'][0]), {'media'})
+        self.assertNotIn('chapters', payload['query'])
+        self.assertNotIn('episodes', payload['query'])
+        self.assertNotIn('progress', payload['query'])
+        self.assertNotIn('已读', files['reading-0.light.svg'])
+        self.assertNotIn('已看', files['watching-0.light.svg'])
+        self.assertFalse(any(name.startswith('favorite-') for name in files))
+
+    def test_missing_recent_list_preserves_snapshot(self):
+        response = {'data': {'User': {'id': p.CONFIG['anilist_id']}, 'reading': {'mediaList': None}}}
+        with patch.object(p, 'json_request', return_value=response), patch.object(p, 'promote') as publish:
+            with self.assertRaises(p.SourceError): p.anilist()
+        publish.assert_not_called()
+
     def test_private_recent_games_are_not_interpreted_as_empty(self):
         with patch.object(p,'json_request',side_effect=[{'response':{'players':[{'steamid':p.CONFIG['steam_id']}] }},{'response':{}}]):
             with self.assertRaises(p.SourceError):p.steam_official('FAKE_TEST_SECRET')

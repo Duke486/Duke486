@@ -6,16 +6,16 @@
   "email": "duke_486@outlook.com",
   "projects": [
     {
+      "name": "MangaUpscale",
+      "description": "Windows 漫画批量超分，支持 ZIP、CBZ 与图片型 EPUB。"
+    },
+    {
+      "name": "AniShelf",
+      "description": "电影、剧集、动漫、漫画与轻小说，一处探索，一份记录。"
+    },
+    {
       "name": "Web-Dev-Beginner",
       "description": "从前端到后端，整理 Web 开发的入门路径。"
-    },
-    {
-      "name": "koi-learn",
-      "description": "Koi 戀，讓每個人都戀上學習"
-    },
-    {
-      "name": "Galgamer_WebPlayer",
-      "description": "用 Vue 3 与 Material Design 构建网页视觉小说播放器。"
     },
     {
       "name": "Fluent-Toys",
@@ -51,5 +51,6 @@
   },
   "excluded_character_ids": [
     33221
-  ]
+  ],
+  "watching_limit": 2
 }

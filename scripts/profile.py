@@ -189,11 +189,29 @@ def promote(module, files, root=ROOT):
     # the complete healthy replacement has been validated and written.
     if module in ('anilist', 'steam') and 'data.json' in files:
         for path in dest.glob('*.svg'):
-            if re.fullmatch(r'(game|character|favorite|reading)-\d+\.(light|dark)\.svg', path.name) and path.name not in files:
+            if re.fullmatch(r'(game|character|favorite|reading|watching)-\d+\.(light|dark)\.svg', path.name) and path.name not in files:
                 path.unlink()
 
 
-QUERY = '''query($id: Int!) { User(id: $id) { id name siteUrl statistics { anime { count episodesWatched } manga { count chaptersRead } } favourites { anime(perPage: 4) { nodes { id title { native romaji english } coverImage { large } siteUrl } } manga(perPage: 4) { nodes { id title { native romaji english } coverImage { large } siteUrl } } characters(perPage: 10) { nodes { id name { full native } image { large } siteUrl } } } } MediaListCollection(userId: $id, type: MANGA, status: CURRENT, sort: UPDATED_TIME_DESC) { lists { entries { progress media { id title { native romaji english } coverImage { large } chapters siteUrl } } } } }'''
+QUERY = """query($id: Int!, $readingLimit: Int!, $watchingLimit: Int!) {
+  User(id: $id) { id name favourites { characters(perPage: 10) {
+    nodes { id name { full native } image { large } siteUrl }
+  } } }
+  reading: Page(page: 1, perPage: $readingLimit) {
+    mediaList(userId: $id, type: MANGA, sort: UPDATED_TIME_DESC) {
+      updatedAt media {
+        id title { native romaji english } coverImage { large } siteUrl
+      }
+    }
+  }
+  watching: Page(page: 1, perPage: $watchingLimit) {
+    mediaList(userId: $id, type: ANIME, sort: UPDATED_TIME_DESC) {
+      updatedAt media {
+        id title { native romaji english } coverImage { large } siteUrl
+      }
+    }
+  }
+}"""
 
 
 def media_title(media):
@@ -201,36 +219,35 @@ def media_title(media):
 
 
 def anilist():
-    response = json_request('https://graphql.anilist.co', {'query': QUERY, 'variables': {'id': CONFIG['anilist_id']}})
+    response = json_request('https://graphql.anilist.co', {'query': QUERY, 'variables': {
+        'id': CONFIG['anilist_id'], 'readingLimit': CONFIG['reading_limit'],
+        'watchingLimit': CONFIG['watching_limit']}})
     if response.get('errors') or not response.get('data', {}).get('User'):
         raise SourceError('AniList returned errors or no user')
     data = response['data']; user = data['User']
     if user['id'] != CONFIG['anilist_id']:
         raise SourceError('Unexpected AniList user')
-    entries = [entry for group in data['MediaListCollection']['lists'] for entry in group['entries']]
-    seen = set(); reading = []
-    for entry in entries:
-        if entry['media']['id'] not in seen:
-            seen.add(entry['media']['id']); reading.append(entry)
-    reading = reading[:CONFIG['reading_limit']]
+    recent = {}
+    for kind in ('reading', 'watching'):
+        entries = data[kind]['mediaList']
+        if not isinstance(entries, list):
+            raise SourceError('AniList list unavailable')
+        recent[kind] = [{'media': entry['media']} for entry in sorted(entries, key=lambda entry: entry['updatedAt'], reverse=True)[:CONFIG[kind+'_limit']]]
     characters = [c for c in user['favourites']['characters']['nodes'] if c['id'] not in CONFIG.get('excluded_character_ids', [])][:CONFIG['character_limit']]
     # Fetch all image bytes before committing any card or metadata.
-    covers = {entry['media']['id']: image_uri(entry['media']['coverImage']['large']) for entry in reading}
+    covers = {entry['media']['id']: image_uri(entry['media']['coverImage']['large'])
+              for entries in recent.values() for entry in entries}
     portraits = {entry['id']: image_uri(entry['image']['large']) for entry in characters}
-    favorites = (user['favourites']['anime']['nodes'][:1] + user['favourites']['manga']['nodes'][:1])
-    favorite_images = {entry['id']: image_uri(entry['coverImage']['large']) for entry in favorites}
     files = {}
     for theme in CONFIG['themes']:
-        for index, entry in enumerate(reading):
-            media = entry['media']
-            progress = f"已读 {entry['progress']} 话" + (f" / {media['chapters']}" if media.get('chapters') else '')
-            files[f'reading-{index}.{theme}.svg'] = small_card(covers[media['id']], media_title(media), theme, progress, index=index+4)
+        for kind, entries in recent.items():
+            for index, entry in enumerate(entries):
+                media = entry['media']
+                files[f'{kind}-{index}.{theme}.svg'] = small_card(covers[media['id']], media_title(media), theme, index=index+4)
         for index, char in enumerate(characters):
             name = char['name'].get('native') or char['name']['full']
             files[f'character-{index}.{theme}.svg'] = small_card(portraits[char['id']], name, theme, portrait=True, index=index)
-        for index, media in enumerate(favorites):
-            files[f'favorite-{index}.{theme}.svg'] = small_card(favorite_images[media['id']], media_title(media), theme, index=index+1)
-    files['data.json'] = json.dumps({'date': today(), 'id': user['id'], 'name': user['name'], 'reading': reading, 'characters': characters, 'favorites': favorites}, ensure_ascii=False, indent=2)
+    files['data.json'] = json.dumps({'date': today(), 'id': user['id'], 'name': user['name'], **recent, 'characters': characters}, ensure_ascii=False, indent=2)
     promote('anilist', files)
 
 
@@ -303,7 +320,7 @@ def steam():
 def design():
     art = 'data:image/png;base64,' + base64.b64encode((ASSETS/'art/miku-tamako.png').read_bytes()).decode()
     files = {}
-    sections = [('projects','Projects',0),('community','Community',4),('steam','Play time',1),('favorites','Favorites',3),('reading','On my bookshelf',5),('characters','Favorite characters',2),('github','GitHub',0),('trakt','Movie nights',3)]
+    sections = [('projects','Projects',0),('community','Community',4),('steam','Play time',1),('watching','Anime updates',3),('reading','Bookshelf updates',5),('characters','Favorite characters',2),('github','GitHub',0),('trakt','Movie nights',3)]
     for theme, colors in CONFIG['themes'].items():
         base = '#E6FAF5' if theme == 'light' else '#163D40'
         body = f'<rect x="3" y="3" width="794" height="204" rx="28" fill="{base}"/>'
@@ -322,7 +339,7 @@ def design():
                 'projects':'M11 14l-5 6 5 6m8-12 5 6-5 6m-3-14-3 16',
                 'community':'M8 20a5 5 0 0 1 5-5h4m-4 10h4a5 5 0 0 0 0-10m-6 5h8',
                 'steam':'M8 15h14l3 12-7-4h-6l-7 4zM10 17v5m-2-3h5m7-1v1m2 1v1',
-                'favorites':'M15 11l3 6 7 1-5 5 1 7-6-4-6 4 1-7-5-5 7-1z',
+                'watching':'M5 10h20v20H5zM12 15l8 5-8 5z',
                 'reading':'M15 15Q9 11 5 14v15q5-3 10 0 5-3 10 0V14q-5-3-10 1v14',
                 'characters':'M15 28C-1 18 8 8 15 16c7-8 16 2 0 12z',
                 'github':'M8 26v-12m0 1h12v10m-12-3h12',
@@ -390,16 +407,15 @@ def readme():
               image_md('design/section-steam', 'Play time', 260), '', '<p>']
     for index, game in enumerate(s.get('games', [])):
         lines += [image_md('steam/game-'+str(index), game['name'], 128, 'https://store.steampowered.com/app/'+str(game['appid'])+'/')]
-    lines += ['</p>', '', image_md('design/section-favorites', 'Favorites', 260), '', '<p>']
-    for index, media in enumerate(a.get('favorites', [])):
-        lines += [image_md('anilist/favorite-'+str(index), media_title(media), 128, media['siteUrl'])]
-    lines += ['</p>', '', image_md('design/section-reading', 'On my bookshelf', 260), '', '<p>']
-    for index, entry in enumerate(a.get('reading', [])):
-        media = entry['media']
-        lines += [image_md('anilist/reading-'+str(index), media_title(media)+' · 已读 '+str(entry['progress'])+' 话', 128, media['siteUrl'])]
     lines += ['</p>', '']
-    if not a.get('reading'):
-        lines += ['暂时没有公开的在读记录。[前往 AniList](https://anilist.co/user/Duke486/)。', '']
+    for kind, label in [('watching', 'Anime updates'), ('reading', 'Bookshelf updates')]:
+        lines += [image_md('design/section-'+kind, label, 260), '', '<p>']
+        for index, entry in enumerate(a.get(kind, [])):
+            media = entry['media']
+            lines += [image_md('anilist/'+kind+'-'+str(index), media_title(media), 128, media['siteUrl'])]
+        lines += ['</p>', '']
+        if not a.get(kind):
+            lines += ['暂无公开记录。[前往 AniList](https://anilist.co/user/Duke486/)。', '']
     lines += [image_md('design/section-characters', 'Favorite characters', 260), '', '<p>']
     for index, char in enumerate(a.get('characters', [])):
         name = char['name'].get('native') or char['name']['full']

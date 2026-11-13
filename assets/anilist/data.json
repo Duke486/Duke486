@@ -1,10 +1,23 @@
 {
-  "date": "2026-11-12",
+  "date": "2026-11-13",
   "id": 5123998,
   "name": "Duke486",
   "reading": [
     {
-      "progress": 0,
+      "media": {
+        "id": 99549,
+        "title": {
+          "native": "からかい上手の（元）高木さん",
+          "romaji": "Karakai Jouzu no (Moto) Takagi-san",
+          "english": null
+        },
+        "coverImage": {
+          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx99549-mrZIpNsPFsCm.png"
+        },
+        "siteUrl": "https://anilist.co/manga/99549"
+      }
+    },
+    {
       "media": {
         "id": 85697,
         "title": {
@@ -15,24 +28,37 @@
         "coverImage": {
           "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/bx85697-INZQiwnVZbmV.png"
         },
-        "chapters": 181,
         "siteUrl": "https://anilist.co/manga/85697"
+      }
+    }
+  ],
+  "watching": [
+    {
+      "media": {
+        "id": 191656,
+        "title": {
+          "native": "生徒会にも穴はある！",
+          "romaji": "Seitokai ni mo Ana wa Aru!",
+          "english": "Even the Student Council Has Its Holes!"
+        },
+        "coverImage": {
+          "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx191656-xFHtxM8SUTdU.png"
+        },
+        "siteUrl": "https://anilist.co/anime/191656"
       }
     },
     {
-      "progress": 0,
       "media": {
-        "id": 152404,
+        "id": 158997,
         "title": {
-          "native": "時々ボソッとロシア語でデレる隣のアーリャさん",
-          "romaji": "Tokidoki Bosotto Rossiya-go de Dereru Tonari no Alya-san",
-          "english": "Alya Sometimes Hides Her Feelings in Russian"
+          "native": "名探偵コナン 灰原哀物語～黒鉄のミステリートレイン～",
+          "romaji": "Meitantei Conan: Haibara Ai Monogatari - Kurogane no Mystery Train",
+          "english": null
         },
         "coverImage": {
-          "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/b152404-PeFLFZXXuVr2.jpg"
+          "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/bx158997-9HkllZFhiV5K.png"
         },
-        "chapters": null,
-        "siteUrl": "https://anilist.co/manga/152404"
+        "siteUrl": "https://anilist.co/anime/158997"
       }
     }
   ],
@@ -135,32 +161,6 @@
         "large": "https://s4.anilist.co/file/anilistcdn/character/large/b139710-EnN2wXd5YeDb.png"
       },
       "siteUrl": "https://anilist.co/character/139710"
-    }
-  ],
-  "favorites": [
-    {
-      "id": 16417,
-      "title": {
-        "native": "たまこまーけっと",
-        "romaji": "Tamako Market",
-        "english": "Tamako Market"
-      },
-      "coverImage": {
-        "large": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/medium/nx16417-r8Njy5UnwvDE.png"
-      },
-      "siteUrl": "https://anilist.co/anime/16417"
-    },
-    {
-      "id": 100080,
-      "title": {
-        "native": "お兄ちゃんはおしまい！",
-        "romaji": "Onii-chan wa Oshimai!",
-        "english": "ONIMAI: I'm Now Your Sister!"
-      },
-      "coverImage": {
-        "large": "https://s4.anilist.co/file/anilistcdn/media/manga/cover/medium/nx100080-OywzGKBBclq0.jpg"
-      },
-      "siteUrl": "https://anilist.co/manga/100080"
     }
   ]
 }
