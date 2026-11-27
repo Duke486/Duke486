@@ -7,33 +7,33 @@
       "appid": 1462040,
       "hours": "6.0",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1462040/ec805ec87558eb40c712c7cca4eabc2e83cb57f7/capsule_184x69.jpg?t=1789446715",
-      "observed_at": "2026-11-26"
+      "observed_at": "2026-11-27"
     },
     {
       "name": "SteamVR",
       "appid": 250820,
       "hours": "42",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/250820/capsule_184x69.jpg?t=1574723957",
-      "observed_at": "2026-11-26"
+      "observed_at": "2026-11-27"
     },
     {
       "name": "Nekopara Sekai Connect",
       "appid": 4437450,
       "hours": "1.6",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/4437450/18ffddc85555b18f07821b4c1902c0d7b0d7a07f/capsule_184x69.jpg?t=1795004829",
-      "observed_at": "2026-11-26"
+      "observed_at": "2026-11-27"
     },
     {
       "name": "FINAL FANTASY VII REBIRTH",
       "appid": 2909400,
       "hours": "0.4",
       "image": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2909400/61fda2e598f865ba6e985830661b98f3167e4ccc/capsule_184x69.jpg?t=1793774936",
-      "observed_at": "2026-11-26"
+      "observed_at": "2026-11-27"
     }
   ],
   "source": "steam_community_xml",
   "label": "公开档案中的游戏",
   "note": "official_api_unavailable",
-  "date": "2026-11-26",
+  "date": "2026-11-27",
   "steam_id": "76561198404562076"
 }
